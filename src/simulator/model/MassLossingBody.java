@@ -13,7 +13,6 @@ public class MassLossingBody extends Body {
 		this.lossFactor = lossFactor;
 		this.lossFrequency = lossFrequency;
 		this.counter = 0;
-		// TODO Auto-generated constructor stub
 	}
 	
 	void move(double t){
