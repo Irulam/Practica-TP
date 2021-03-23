@@ -15,6 +15,10 @@ public class MassLossingBody extends Body {
 		this.counter = 0;
 	}
 	
+	public MassLossingBody(Body createTheInstance, double lossFrequency2, double lossFactor2) {
+		super(createTheInstance);
+	}
+
 	void move(double t){
 		super.move(t);
 		if(counter>lossFrequency) {

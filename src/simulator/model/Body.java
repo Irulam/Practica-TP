@@ -11,7 +11,7 @@ public class Body {
 	private double mass;
 	private Vector2D aceleration;
 	
-	Body(String id, Vector2D velocity, Vector2D force, Vector2D position, double mass){
+	public Body(String id, Vector2D velocity, Vector2D force, Vector2D position, double mass){
 		this.id = id;
 		this.velocity = velocity;
 		this.force = force;
@@ -19,6 +19,14 @@ public class Body {
 		this.mass = mass;
 	}
 	
+	public Body(Body createTheInstance) {
+		this.id = createTheInstance.id;
+		this.velocity = createTheInstance.velocity;
+		this.force = createTheInstance.force;
+		this.position = createTheInstance.position;
+		this.mass = createTheInstance.mass;
+	}
+
 	public String getId() {
 		return this.id;
 	}
