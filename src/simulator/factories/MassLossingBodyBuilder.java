@@ -7,15 +7,22 @@ import simulator.model.MassLossingBody;
 
 public class MassLossingBodyBuilder extends BasicBodyBuilder{
 
-	public MassLossingBodyBuilder(String type, String description) {
-		super(type, description);
+	public MassLossingBodyBuilder() {
+		super("lossing body", "mass lossing body");
 	}
 
 	@Override
 	public JSONObject getBuilderInfo() {
 		JSONObject info = new JSONObject();
-		info.put("factor", "loss factor");
-		info.put("freq", "loss frequency");
+		JSONObject data = new JSONObject();
+		info.put("type","mlb");
+		info.put("id","b1");
+		data.put("p", new double [] {-3.5, 0.0});
+		data.put("v", new double [] {0.0, 1.4});
+		data.put("m", 3.0);
+		data.put("freq",1.0);
+		data.put("factor", 1.0);
+		info.put("data", data);
 		return info;
 	}
 

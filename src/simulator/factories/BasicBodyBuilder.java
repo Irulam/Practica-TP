@@ -8,8 +8,12 @@ import simulator.model.Body;
 
 public class BasicBodyBuilder extends Builder<Body>{
 	
-	public BasicBodyBuilder(String type, String description) {
-		super(type,description);
+	public BasicBodyBuilder() {
+		super("body","basic body");
+	}
+	
+	public BasicBodyBuilder(String typeTag, String desc) {
+		super(typeTag, desc);
 	}
 
 	@Override
@@ -27,11 +31,13 @@ public class BasicBodyBuilder extends Builder<Body>{
 	@Override
 	public JSONObject getBuilderInfo() {
 		JSONObject info = new JSONObject();
-		info.put("id", "id");
-		info.put("m", "Mass of the object");
-		info.put("p", "Position");
-		info.put("v", "Velocity");
-		info.put("f", "Force");
+		JSONObject data = new JSONObject();
+		info.put("type","basic");
+		info.put("id","b1");
+		data.put("p", new double [] {0.0, 0.0});
+		data.put("v", new double [] {0.05, 0.0});
+		data.put("m", 5.97);
+		info.put("data", data);
 		return info;
 	}
 	
