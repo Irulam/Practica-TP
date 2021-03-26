@@ -50,7 +50,8 @@ public class Main {
 	private static Integer _steps = null;
 	private static String _inFile = null;
 	private static String _outFile = null;
-	private static String _expOutFile = null;
+	private static String _eoutFile = null;
+	private static InputStream _expOutFile = null;
 	private static JSONObject _forceLawsInfo = null;
 	private static JSONObject _stateComparatorInfo = null;
 
@@ -201,10 +202,14 @@ public class Main {
 	}
 
 
-	private static void parseOutOption(CommandLine line) throws ParseException {
-		_outFile = line.getOptionValue("o");
-		if (_outFile == null) {
-			throw new ParseException("In batch mode an output file of bodies is required");
+	private static void parseOutFileOption(CommandLine line) throws ParseException {
+		_eoutFile = line.getOptionValue("eo");
+		try {
+			if (_outFile == null) {
+				_expOutFile = new FileInputStream(_eoutFile);
+			}
+		} catch (Exception e) {
+			throw new ParseException("Invalid expected output");
 		}
 		
 	}
@@ -222,8 +227,8 @@ public class Main {
 		
 	}
 
-	private static void parseOutFileOption(CommandLine line) throws ParseException {
-		_expOutFile = line.getOptionValue("eo");
+	private static void parseOutOption(CommandLine line) throws ParseException {
+		_outFile = line.getOptionValue("eo");
 		if (_expOutFile == null) {
 			throw new ParseException("In batch mode an output file of bodies is required");
 		}
@@ -291,7 +296,7 @@ public class Main {
 		controller.loadBodies(new FileInputStream(_inFile));
 		
 		if (_outFile == null) { 
-			controller.run(_steps, System.out);
+			controller.run(_steps, System.out, _expOutFile, comparator);
 		} else {
 			try (OutputStream outFile = new FileOutputStream(_outFile)) {
 				controller.run(_steps, outFile, _expOutFile, comparator);

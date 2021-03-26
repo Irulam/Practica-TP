@@ -24,7 +24,9 @@ public class Controller {
 		_laws = laws;
 	}
 	
-	/*Carga los cuerpos dados en formato JSON*/
+	/*Carga los cuerpos dados en formato JSON
+	 * Primero convierte los json a jsonobject para después crear cuerpos
+	 * con esta información en las factorías y añadirlos al simulador*/
 	public void loadBodies(InputStream in) {
 		JSONObject jIn = new JSONObject(new JSONTokener(in));
 		JSONArray jarray = jIn.getJSONArray("bodies");
@@ -39,20 +41,24 @@ public class Controller {
 			_simulator.advance();
 	}
 	
-	// Avanza cierto numero de pasos y muestra el estado del simulador para cada uno de ellos
-	public void run(int n, OutputStream out, InputStream expOut, StateComparator cmp) {
+	/* Avanza cierto numero de pasos y muestra el estado del simulador obtenido mediante el método toString
+	 * en cada uno de dichos pasos, compara el estado del simulador con el esperado y lanza un error si no coinciden */
+	public void run(int n, OutputStream out, InputStream expOut, StateComparator cmp) throws RunControllerException {
 		if (n <= 0) throw new IllegalArgumentException("Pasos incorrectos");
 		PrintStream printStream = new PrintStream(out);
 		
 		printStream.print("{ \"states\" : [ ");
+		
 		for (int i = 0; i <= n; ++i) {
+			JSONObject jexpOut = new JSONObject(expOut); 
+			JSONObject jOut = new JSONObject(out);
 			if (i != 0) {
 				printStream.print(", ");
 			}
-			JSONObject jexpOut = new JSONObject(expOut); 
-			JSONObject jOut = new JSONObject(out);
-			cmp.equal(jexpOut, jOut);
 			printStream.print(_simulator.toString());
+			if (!cmp.equal(jexpOut, jOut)) {
+				throw new RunControllerException("El estado del paso " + i + "no es el esperado");
+			}
 			_simulator.advance();
 		}
 		printStream.print(" ] }");
