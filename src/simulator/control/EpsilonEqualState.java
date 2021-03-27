@@ -1,7 +1,5 @@
 package simulator.control;
 
-import java.util.Iterator;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,31 +11,31 @@ public class EpsilonEqualState implements StateComparator{
 		this.eps = eps;
 	}
 	public boolean equal(JSONObject s1, JSONObject s2) {
-		boolean equal;
-		Iterator<String> keys1 = s1.keys();
-		Iterator<String> keys2 = s2.keys();
-		JSONArray jar1 = s1.getJSONArray("bodies");
-		JSONArray jar2 = s2.getJSONArray("bodies");
+		JSONArray bodiesS1 = s1.getJSONArray("bodies");
+		JSONArray bodiesS2 = s2.getJSONArray("bodies");
+		boolean equal = bodiesS1.length() == bodiesS2.length() && s1.get("time").equals(s1.get("time"));
+		int i = 0;
 		
-		equal = equalModuleEps(jar1.getDouble(1),jar2.getDouble(1));
-		
-		/*
-		for(int i=1; i<jar1.length();i++) {
-			equal = equal && equalModuleEps(jar1.getClass(i),jar2.getDouble(i));
+		while(equal&&i<bodiesS1.length()) {
+			JSONObject bodyS1 = bodiesS1.getJSONObject(i);
+			JSONObject bodyS2 = bodiesS2.getJSONObject(i);
+			 
+			equal = bodyS1.get("id").equals(bodyS2.get("id")) &&
+					equalModuleEps(bodyS1.getDouble("mass"),bodyS2.getDouble("mass")) &&
+					equalModuleEps((Vector2D) bodyS1.get("p"),(Vector2D) bodyS2.get("p")) &&
+					equalModuleEps((Vector2D) bodyS1.get("v"),(Vector2D) bodyS2.get("v")) &&
+					equalModuleEps((Vector2D) bodyS1.get("f"),(Vector2D) bodyS2.get("f"));
+			i++;
 		}
-		*/
 		
-		for(Object ob: jar1) {
-			equalModuleEps(ob.getClass(),ob.getClass());
-		}
-		return keys1.next().equals(keys2.next()) && jar1.get(0).equals(jar2.get(0)) ;
+		return equal;
 	}
 	
-	public boolean equalModuleEps(double a, double b) {
+	private boolean equalModuleEps(double a, double b) {
 		return Math.abs(a-b)<= eps;
 	}
 	
-	public boolean equalModuleEps(Vector2D v1, Vector2D v2){
+	private boolean equalModuleEps(Vector2D v1, Vector2D v2){
 		return v1.distanceTo(v2)<=eps;
 	}
 }
