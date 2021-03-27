@@ -19,6 +19,12 @@ public class PhysicsSimulator {
 		this.bodies = new ArrayList<>();
 	}
 	
+	/*TODO: Aqui no se ha definido cuál es la nueva fuerza,
+	 *  donde se hace?
+	 */
+	/*Para cada paso de la simulación solicita a los cuerpos que se muevan
+	 * según las leyes de fuerza impuestas
+	 */
 	public void advance() {
 		
 		resetForce();
@@ -44,6 +50,10 @@ public class PhysicsSimulator {
 		else bodies.add(b);
 	}
 	
+	/*Proporciona información sobre los cuerpos en el estado actual.
+	 * Dicha información es solicita por el controlador a la hora de 
+	 * mostrar el estado de la simulación.
+	 */
 	public JSONObject getState() {
 		JSONObject json = new JSONObject();
 		json.put("time", tActual);

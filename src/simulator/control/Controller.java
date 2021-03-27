@@ -41,6 +41,9 @@ public class Controller {
 			_simulator.advance();
 	}
 	
+	/*TODO: es aqui donde se deberia pasar la salida por json 
+	 * tal y como dice la pg 2 del enunciado
+	 */
 	/* Avanza cierto numero de pasos y muestra el estado del simulador obtenido mediante el método toString
 	 * en cada uno de dichos pasos, compara el estado del simulador con el esperado y lanza un error si no coinciden */
 	public void run(int n, OutputStream out, InputStream expOut, StateComparator cmp) throws RunControllerException {
