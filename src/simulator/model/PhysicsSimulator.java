@@ -7,13 +7,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class PhysicsSimulator {
-	private double tReal; //TODO: exception
+	private double tReal; 
 	private double tActual;
-	private ForceLaws laws; //TODO: exception
+	private ForceLaws laws; 
 	private List<Body> bodies;
 
 	
 	public PhysicsSimulator(double tReal, ForceLaws laws) {
+		if(tReal<0 || laws == null) {
+			throw new IllegalArgumentException("Argumentos del simulador no válidos");
+		}
 		this.tReal = tReal;
 		this.laws = laws;
 		this.bodies = new ArrayList<>();

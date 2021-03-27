@@ -89,8 +89,8 @@ public class Body {
 		
 	}
 	
-	//TODO
-	/*
-	public String toString()
-	*/
+	public String toString() {
+		return getState().toString();
+	}
+	
 }

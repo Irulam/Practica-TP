@@ -11,6 +11,10 @@ public abstract class Builder<T> {
 		_description = description;
 	}
 	
+	/*TODO: lanza una excepcion IllegalArgument, para ello dentro
+	 * de el constructor de una clase tendrá que lanzar la excepción 
+	 * correspondiente
+	 */
 	public T createInstance(JSONObject info) {
 		T b = null;
 		if (_type != null && _type.equals(info.getString("type")))
@@ -18,6 +22,9 @@ public abstract class Builder<T> {
 		return b;
 	}
 	
+	/*Devuelve un objeto JSON que sirve de plantilla para 
+	 * crear una instancia
+	 */
 	public abstract JSONObject getBuilderInfo();	
 	protected abstract T createTheInstance(JSONObject jo);
 

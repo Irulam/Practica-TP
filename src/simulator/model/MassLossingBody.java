@@ -2,6 +2,7 @@ package simulator.model;
 
 import simulator.misc.Vector2D;
 
+//TODO: inventar una clase nueva de cuerpos como esta
 public class MassLossingBody extends Body {
     double lossFactor;
     double lossFrequency; //tiempo despues del cual el objeto pierde masa
@@ -21,8 +22,11 @@ public class MassLossingBody extends Body {
 
 	void move(double t){
 		super.move(t);
-		if(counter>lossFrequency) {
+		if(counter==lossFrequency) {
 			mass = mass*(1-lossFactor);
+			counter = 0;
+		}else {
+			counter++;
 		}
 	}
 
