@@ -11,6 +11,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 		super("universal laws", "newton universal laws");
 	}
 
+	//TODO: poner bien el valor de G
 	@Override
 	public JSONObject getBuilderInfo() {
 		JSONObject info = new JSONObject();

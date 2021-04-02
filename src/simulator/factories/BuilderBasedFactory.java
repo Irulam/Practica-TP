@@ -19,7 +19,10 @@ public class BuilderBasedFactory<T> implements Factory<T> {
 		}
 	}
 	
-	//Busca al constructor que pueda crear a un objeto correspondiente
+	/*Busca al constructor que pueda crear a un objeto correspondiente
+	 * lanza una excepcion IllegalArgumentExcepcion 
+	 */
+	//TODO: no estoy segura de que esto lance una excepcion
 	@Override
 	public T createInstance(JSONObject info) {
 		T instance = null;

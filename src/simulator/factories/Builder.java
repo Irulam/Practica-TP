@@ -2,6 +2,7 @@ package simulator.factories;
 
 import org.json.JSONObject;
 
+//Crea una instancia de un tipo T
 public abstract class Builder<T> {
 	protected String _type;
 	protected String _description;
@@ -14,6 +15,9 @@ public abstract class Builder<T> {
 	/*TODO: lanza una excepcion IllegalArgument, para ello dentro
 	 * de el constructor de una clase tendrá que lanzar la excepción 
 	 * correspondiente
+	 */
+	/*si no es capaz de crear la instancia del tipo indicado devuelve null,
+	 * en caso de ser correcto el tipo pero no los datos lanza una excepción
 	 */
 	public T createInstance(JSONObject info) {
 		T b = null;

@@ -15,7 +15,7 @@ public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
 		JSONObject info = new JSONObject();
 		JSONObject data = new JSONObject();
 		info.put("type", "epseq");
-		data.put("eps", 0.1);
+		data.put("eps", 0.0);
 		info.put("data", data);
 		return info;
 	}

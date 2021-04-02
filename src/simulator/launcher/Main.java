@@ -34,6 +34,7 @@ import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
 
+//TODO: no sé como funciona el proceso de recibir los estados esperados, posiblemente hay fallos en el batch mode por este motivo
 public class Main {
 
 	// default values for some parameters
