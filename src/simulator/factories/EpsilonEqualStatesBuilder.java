@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import simulator.control.EpsilonEqualState;
 import simulator.control.StateComparator;
 
-public class EpsilonEqualStatesBuilder extends Builder<EpsilonEqualState>{
+public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
 
 	public EpsilonEqualStatesBuilder() {
 		super("eps equal", "epsilon equal states builder");
@@ -22,7 +22,7 @@ public class EpsilonEqualStatesBuilder extends Builder<EpsilonEqualState>{
 	}
 
 	@Override
-	protected EpsilonEqualState createTheInstance(JSONObject jo) {
+	protected StateComparator createTheInstance(JSONObject jo) {
 		double eps = jo.getDouble("eps");
 		return new EpsilonEqualState(eps);
 	}

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import simulator.control.MassEqualState;
 import simulator.control.StateComparator;
 
-public class MassEqualStateBuilder extends Builder<MassEqualState>{
+public class MassEqualStateBuilder extends Builder<StateComparator>{
 
 	public MassEqualStateBuilder() {
 		super("mass equal", "mass equal state builder");
@@ -21,7 +21,7 @@ public class MassEqualStateBuilder extends Builder<MassEqualState>{
 	}
 
 	@Override
-	protected MassEqualState createTheInstance(JSONObject jo) {
+	protected StateComparator createTheInstance(JSONObject jo) {
 		
 		return new MassEqualState();
 	}
