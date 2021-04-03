@@ -2,13 +2,13 @@ package simulator.factories;
 
 import org.json.JSONObject;
 
+import simulator.control.MassEqualState;
 import simulator.control.StateComparator;
 
-public class MassEqualStateBuilder extends Builder<StateComparator>{
+public class MassEqualStateBuilder extends Builder<MassEqualState>{
 
 	public MassEqualStateBuilder() {
 		super("mass equal", "mass equal state builder");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -21,9 +21,9 @@ public class MassEqualStateBuilder extends Builder<StateComparator>{
 	}
 
 	@Override
-	protected StateComparator createTheInstance(JSONObject jo) {
-		// TODO Auto-generated method stub
-		return null;
+	protected MassEqualState createTheInstance(JSONObject jo) {
+		
+		return new MassEqualState();
 	}
 
 }

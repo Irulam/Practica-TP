@@ -313,12 +313,14 @@ public class Main {
 		return new EpsilonEqualState(_eps);
 	}
 
+	//TODO: primero se ha tenido que seleccionar las leyes porque si no daría error
 	private static PhysicsSimulator createsSimulator() {
 		return new PhysicsSimulator(_dtime, _laws);
 	}
 
+	//forceLawsInfo se ha rellenado en la opción para seleccionar las leyes de fuerza
 	private static Controller createsController(PhysicsSimulator simulator) {
-		Controller controller = new Controller(simulator, _bodyFactory, _forceLawsFactory);
+		Controller controller = new Controller(simulator, _bodyFactory);
 		controller.setForceLaws(_forceLawsInfo);
 		
 		return controller;

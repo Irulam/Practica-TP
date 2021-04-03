@@ -18,10 +18,10 @@ public class Controller {
 	private Factory<Body> _factory; //Construir cuerpos
 	private Factory<ForceLaws> _laws;
 	
-	public Controller(PhysicsSimulator simulator, Factory<Body> factory, Factory<ForceLaws> laws) {
+	//Recibe al simulador y una factoría de cuerpos
+	public Controller(PhysicsSimulator simulator, Factory<Body> factory) {
 		_simulator = simulator;
 		_factory = factory;
-		_laws = laws;
 	}
 	
 	/*Carga los cuerpos dados en formato JSON
@@ -41,8 +41,7 @@ public class Controller {
 			_simulator.advance();
 	}
 	
-	/*TODO: es aqui donde se deberia pasar la salida por json 
-	 * tal y como dice la pg 2 del enunciado
+	/*TODO: en la página 2 del enunciado dice que la salida es un json pero aqui sólo se usa para compararlo con la salida esperada
 	 */
 	/* Avanza cierto numero de pasos y muestra el estado del simulador obtenido mediante el método toString
 	 * en cada uno de dichos pasos, compara el estado del simulador con el esperado y lanza un error si no coinciden */

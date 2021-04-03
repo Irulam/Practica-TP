@@ -2,9 +2,10 @@ package simulator.factories;
 
 import org.json.JSONObject;
 
+import simulator.control.EpsilonEqualState;
 import simulator.control.StateComparator;
 
-public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
+public class EpsilonEqualStatesBuilder extends Builder<EpsilonEqualState>{
 
 	public EpsilonEqualStatesBuilder() {
 		super("eps equal", "epsilon equal states builder");
@@ -21,9 +22,9 @@ public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
 	}
 
 	@Override
-	protected StateComparator createTheInstance(JSONObject jo) {
-		// TODO Auto-generated method stub
-		return null;
+	protected EpsilonEqualState createTheInstance(JSONObject jo) {
+		double eps = jo.getDouble("eps");
+		return new EpsilonEqualState(eps);
 	}
 
 }

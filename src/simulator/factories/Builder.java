@@ -12,12 +12,13 @@ public abstract class Builder<T> {
 		_description = description;
 	}
 	
-	/*TODO: lanza una excepcion IllegalArgument, para ello dentro
-	 * de el constructor de una clase tendrá que lanzar la excepción 
-	 * correspondiente
-	 */
+	
 	/*si no es capaz de crear la instancia del tipo indicado devuelve null,
 	 * en caso de ser correcto el tipo pero no los datos lanza una excepción
+	 */
+	/*lanza una excepcion IllegalArgument, para ello dentro
+	 * de el constructor de una clase tendrá que lanzar la excepción 
+	 * correspondiente
 	 */
 	public T createInstance(JSONObject info) {
 		T b = null;

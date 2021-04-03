@@ -5,7 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MassEqualState implements StateComparator{
-
+	public MassEqualState() {
+	}
+	
 	@Override
 	public boolean equal(JSONObject s1, JSONObject s2) {
 		JSONArray bodiesS1 = s1.getJSONArray("bodies");

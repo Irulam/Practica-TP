@@ -22,7 +22,6 @@ public class BuilderBasedFactory<T> implements Factory<T> {
 	/*Busca al constructor que pueda crear a un objeto correspondiente
 	 * lanza una excepcion IllegalArgumentExcepcion 
 	 */
-	//TODO: no estoy segura de que esto lance una excepcion
 	@Override
 	public T createInstance(JSONObject info) {
 		T instance = null;
@@ -32,6 +31,7 @@ public class BuilderBasedFactory<T> implements Factory<T> {
 		return instance;
 	}
 
+	//TODO: No entiendo esta función, a la hora de implementarla he puesto los valores por defecto
 	@Override
 	public List<JSONObject> getInfo() {
 		return new ArrayList<>(_objetos);

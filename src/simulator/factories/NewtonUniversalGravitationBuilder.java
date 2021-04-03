@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import simulator.model.ForceLaws;
 import simulator.model.NewtonUniversalGravitation;
+import java.lang.Math;
 
 public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 
@@ -11,13 +12,12 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 		super("universal laws", "newton universal laws");
 	}
 
-	//TODO: poner bien el valor de G
 	@Override
 	public JSONObject getBuilderInfo() {
 		JSONObject info = new JSONObject();
 		JSONObject data = new JSONObject();
 		info.put("type","nlug");
-		data.put("G",6.67);
+		data.put("G", 6.67*Math.pow(10, -11));
 		info.put("data",data);
 		return info;
 	}

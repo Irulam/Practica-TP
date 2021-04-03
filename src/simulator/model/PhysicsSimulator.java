@@ -22,9 +22,7 @@ public class PhysicsSimulator {
 		this.bodies = new ArrayList<>();
 	}
 	
-	/*TODO: Aqui no se ha definido cuál es la nueva fuerza,
-	 *  donde se hace?
-	 */
+
 	/*Para cada paso de la simulación solicita a los cuerpos que se muevan
 	 * según las leyes de fuerza impuestas
 	 */
@@ -72,6 +70,9 @@ public class PhysicsSimulator {
 		return getState().toString();
 	}
 
+	/*TODO: Es posible cambiar las leyes de fuerza gracias a este método, no sale en el enunciado pero he asumido 
+	 * que está porque cada vez que avanza el simulador resetea las leyes de fuerza
+	 */
 	public void setForceLaws(ForceLaws laws) {
 		if(laws == null) {
 			throw new IllegalArgumentException("Debe haber alguna ley de fuerza");
