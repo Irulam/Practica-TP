@@ -73,6 +73,9 @@ public class PhysicsSimulator {
 	}
 
 	public void setForceLaws(ForceLaws laws) {
+		if(laws == null) {
+			throw new IllegalArgumentException("Debe haber alguna ley de fuerza");
+		}
 		this.laws = laws;
 	}
 }

@@ -68,18 +68,15 @@ public class Body {
 		velocity.plus(acelerationAux2);		
 	}
 	
-	/*TODO: no estoy segura de si aqui tendría que haber usado toString
-	 * creo que no se corresponde con el formato de los profes
-	 * quizas habria que usar asJSONArray pero tampoco me queda claro
-	 * lo que es un jsonarray
+	/*TODO: quizas hay que usar asJSONArray 
 	 */
 	public JSONObject getState() {
 		JSONObject data = new JSONObject();
 		data.put("id", id);
 		data.put("m", mass);
-		data.put("p", position.toString());
-		data.put("v", velocity.toString());
-		data.put("f", force.toString());
+		data.put("p", position);
+		data.put("v", velocity);
+		data.put("f", force);
 		return data;
 
 	}
