@@ -9,7 +9,7 @@ import java.lang.Math;
 public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 
 	public NewtonUniversalGravitationBuilder() {
-		super("universal laws", "newton universal laws");
+		super("nlug", "newton universal laws");
 	}
 
 	@Override

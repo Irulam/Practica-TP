@@ -41,6 +41,7 @@ public class Main {
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
+	//TODO: Falta el _eps default
 	private final static Integer _sDefaultValue = 150;
 	// some attributes to stores values corresponding to command-line parameters
 	//
@@ -168,7 +169,8 @@ public class Main {
 			if (s.length() > 0) {
 				s = s + ", ";
 			}
-			s = s + "'" + fe.getString("type") + "' (" + fe.getString("data") + ")";
+			//TODO:para obtener data se usaba getString pero en el enunciado (pg 8) decia que es un json
+			s = s + "'" + fe.getString("type") + "' (" + fe.getJSONObject("data") + ")";
 		}
 
 		s = s + ". You can provide the 'data' json attaching :{...} to the tag, but without spaces.";
@@ -193,7 +195,7 @@ public class Main {
 	private static void parseDeltaTimeOption(CommandLine line) throws ParseException {
 		String dt = line.getOptionValue("dt", _dtimeDefaultValue.toString());
 		try {
-			if (_dtime > 0);{
+			if (_dtime == null);{
 				_dtime = Double.parseDouble(dt);
 			}
 		} catch (Exception e) {
@@ -205,7 +207,7 @@ public class Main {
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
 		_eoutFile = line.getOptionValue("eo");
 		try {
-			if (_outFile == null) {
+			if (_expOutFile != null) {
 				_expOutFile = new FileInputStream(_eoutFile);
 			}
 		} catch (Exception e) {
@@ -217,7 +219,7 @@ public class Main {
 	private static void parseStepOption(CommandLine line) throws ParseException {
 		String s = line.getOptionValue("s", _sDefaultValue.toString());
 		try {
-			if(_steps>0) {
+			if(_steps==null) {
 				_steps = Integer.parseInt(s);
 			}
 		} catch (Exception e) {
@@ -228,8 +230,8 @@ public class Main {
 	}
 
 	private static void parseOutOption(CommandLine line) throws ParseException {
-		_outFile = line.getOptionValue("eo");
-		if (_expOutFile == null) {
+		_outFile = line.getOptionValue("o");
+		if (_outFile == null) {
 			throw new ParseException("In batch mode an output file of bodies is required");
 		}
 		
@@ -279,6 +281,8 @@ public class Main {
 		if (_forceLawsInfo == null) {
 			throw new ParseException("Invalid force laws: " + fl);
 		}
+		
+		_laws = _forceLawsFactory.createInstance(_forceLawsInfo);
 	}
 
 	private static void parseStateComparatorOption(CommandLine line) throws ParseException {
@@ -320,7 +324,6 @@ public class Main {
 	//forceLawsInfo se ha rellenado en la opción para seleccionar las leyes de fuerza
 	private static Controller createsController(PhysicsSimulator simulator) {
 		Controller controller = new Controller(simulator, _bodyFactory);
-		controller.setForceLaws(_forceLawsInfo);
 		
 		return controller;
 
