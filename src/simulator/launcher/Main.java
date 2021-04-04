@@ -168,7 +168,7 @@ public class Main {
 			if (s.length() > 0) {
 				s = s + ", ";
 			}
-			s = s + "'" + fe.getString("type") + "' (" + fe.getString("desc") + ")";
+			s = s + "'" + fe.getString("type") + "' (" + fe.getString("data") + ")";
 		}
 
 		s = s + ". You can provide the 'data' json attaching :{...} to the tag, but without spaces.";

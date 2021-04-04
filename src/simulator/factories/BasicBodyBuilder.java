@@ -38,6 +38,7 @@ public class BasicBodyBuilder extends Builder<Body>{
 		data.put("v", new double [] {0.05, 0.0});
 		data.put("m", 5.97);
 		info.put("data", data);
+		info.put("desc", "basic body");
 		return info;
 	}
 	

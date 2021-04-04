@@ -19,6 +19,7 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 		info.put("type","nlug");
 		data.put("G", 6.67*Math.pow(10, -11));
 		info.put("data",data);
+		info.put("desc", "Newton law");
 		return info;
 	}
 

@@ -18,6 +18,7 @@ public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
 		info.put("type", "epseq");
 		data.put("eps", 0.0);
 		info.put("data", data);
+		info.put("desc", "epsilon equal states builder");
 		return info;
 	}
 

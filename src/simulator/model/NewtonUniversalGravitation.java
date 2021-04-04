@@ -1,7 +1,6 @@
 package simulator.model;
 
 import java.util.List;
-import java.util.Vector;
 
 import simulator.misc.Vector2D;
 

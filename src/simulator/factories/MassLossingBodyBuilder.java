@@ -23,6 +23,7 @@ public class MassLossingBodyBuilder extends BasicBodyBuilder{
 		data.put("freq",1.0);
 		data.put("factor", 1.0);
 		info.put("data", data);
+		info.put("desc", "Mass lossing body");
 		return info;
 	}
 

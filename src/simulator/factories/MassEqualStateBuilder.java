@@ -17,6 +17,7 @@ public class MassEqualStateBuilder extends Builder<StateComparator>{
 		JSONObject data = new JSONObject();
 		info.put("type", "masseq");
 		info.put("data", data);
+		info.put("desc", "mass equal state builder");
 		return info;
 	}
 

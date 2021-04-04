@@ -23,6 +23,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 		data.put("c",new double [] {0.0});
 		data.put("g",9.81);
 		info.put("data",data);
+		info.put("desc", "moving towards fixed point");
 		return info;
 	}
 
