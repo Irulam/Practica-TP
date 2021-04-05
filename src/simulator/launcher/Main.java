@@ -41,12 +41,11 @@ public class Main {
 	private final static Double _dtimeDefaultValue = 2500.0;
 	private final static String _forceLawsDefaultValue = "nlug";
 	private final static String _stateComparatorDefaultValue = "epseq";
-	//TODO: Falta el _eps default
+	private final static Double _epsDefaultValue = 0.0;
 	private final static Integer _sDefaultValue = 150;
 	// some attributes to stores values corresponding to command-line parameters
 	//
 	private static Double _dtime = null;
-	private static Double _eps = null;
 	private static ForceLaws _laws = null;
 	private static Integer _steps = null;
 	private static String _inFile = null;
@@ -276,7 +275,7 @@ public class Main {
 	}
 
 	private static void parseForceLawsOption(CommandLine line) throws ParseException {
-		String fl = line.getOptionValue("fl", _forceLawsDefaultValue);
+		String fl = line.getOptionValue("fl", _forceLawsDefaultValue.toString());
 		_forceLawsInfo = parseWRTFactory(fl, _forceLawsFactory);
 		if (_forceLawsInfo == null) {
 			throw new ParseException("Invalid force laws: " + fl);
@@ -313,7 +312,7 @@ public class Main {
 
 
 	private static StateComparator createsComparator() {
-		return new EpsilonEqualState(_eps);
+		return new EpsilonEqualState(_epsDefaultValue);
 	}
 
 	//TODO: primero se ha tenido que seleccionar las leyes porque si no daría error

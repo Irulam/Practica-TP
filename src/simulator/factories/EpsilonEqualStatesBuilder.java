@@ -8,7 +8,7 @@ import simulator.control.StateComparator;
 public class EpsilonEqualStatesBuilder extends Builder<StateComparator>{
 
 	public EpsilonEqualStatesBuilder() {
-		super("eps equal", "epsilon equal states builder");
+		super("epseq", "epsilon equal states builder");
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import simulator.control.StateComparator;
 public class MassEqualStateBuilder extends Builder<StateComparator>{
 
 	public MassEqualStateBuilder() {
-		super("mass equal", "mass equal state builder");
+		super("masseq", "mass equal state builder");
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import simulator.model.Body;
 public class BasicBodyBuilder extends Builder<Body>{
 	
 	public BasicBodyBuilder() {
-		super("body","basic body");
+		super("basic","basic body");
 	}
 	
 	public BasicBodyBuilder(String typeTag, String desc) {

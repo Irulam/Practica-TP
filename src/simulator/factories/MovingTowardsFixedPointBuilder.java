@@ -12,7 +12,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 	}
 	
 	public MovingTowardsFixedPointBuilder() {
-		super("fixed point", "moving towards fixed point");
+		super("mtcp", "moving towards fixed point");
 	}
 
 	@Override
