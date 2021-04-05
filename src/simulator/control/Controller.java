@@ -41,29 +41,31 @@ public class Controller {
 			_simulator.advance();
 	}
 	
-	/*TODO: en la página 2 del enunciado dice que la salida es un json pero aqui sólo se usa para compararlo con la salida esperada
-	 */
 	/* Avanza cierto numero de pasos y muestra el estado del simulador obtenido mediante el método toString
 	 * en cada uno de dichos pasos, compara el estado del simulador con el esperado y lanza un error si no coinciden */
 	public void run(int n, OutputStream out, InputStream expOut, StateComparator cmp) throws RunControllerException {
 		if (n <= 0) throw new IllegalArgumentException("Pasos incorrectos");
-		PrintStream printStream = new PrintStream(out);
+	
+		JSONArray jexpOutStates = null;
+		JSONArray jOutStates = new JSONArray();
 		
-		printStream.print("{ \"states\" : [ ");
+		if (expOut != null) jexpOutStates = (new JSONObject(expOut)).getJSONArray("states"); 
 		
-		for (int i = 0; i <= n; ++i) {
-			JSONObject jexpOut = new JSONObject(expOut); 
-			JSONObject jOut = new JSONObject(out);
-			if (i != 0) {
-				printStream.print(", ");
-			}
-			printStream.print(_simulator.toString());
-			if (!cmp.equal(jexpOut, jOut)) {
+		for (int i = 0; i <= n; ++i) {	
+			JSONObject s = _simulator.getState();
+			
+			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {
 				throw new RunControllerException("El estado del paso " + i + "no es el esperado");
 			}
+			
+			jOutStates.put(s);
 			_simulator.advance();
 		}
-		printStream.print(" ] }");
+
+		JSONObject jOut = new JSONObject();
+		jOut.put("states", jOutStates);
+		PrintStream printStream = new PrintStream(out);
+		printStream.print(jOut.toString());
 		printStream.close();
 	}
 	

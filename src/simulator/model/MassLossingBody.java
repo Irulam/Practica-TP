@@ -8,9 +8,9 @@ public class MassLossingBody extends Body {
     double lossFrequency; //tiempo despues del cual el objeto pierde masa
     double counter; 
 	private double mass;
-    MassLossingBody(String id, Vector2D velocity, Vector2D force, Vector2D position,
+    MassLossingBody(String id, Vector2D velocity, Vector2D position,
 			double mass, double lossFactor, double lossFrequency) {
-		super(id, velocity, force, position, mass);
+		super(id, velocity, position, mass);
 		this.lossFactor = lossFactor;
 		this.lossFrequency = lossFrequency;
 		this.counter = 0;

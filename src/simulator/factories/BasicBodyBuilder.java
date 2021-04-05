@@ -22,9 +22,9 @@ public class BasicBodyBuilder extends Builder<Body>{
 		double m = info.getDouble("m");
 		Vector2D p = createVector2D(info, "p");
 		Vector2D v = createVector2D(info, "v");
-		Vector2D f = createVector2D(info, "f");
+		// Vector2D f = createVector2D(info, "f");
 		
-		return new Body(id, v, f, p, m);
+		return new Body(id, v, p, m);
 
 	}
 	

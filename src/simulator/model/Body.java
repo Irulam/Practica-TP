@@ -13,10 +13,9 @@ public class Body {
 	
 	/*Cuando se les solicita se pueden mover. Al moverse cambian sus parámtros de acuerdo a 
 	las leyes físicas aplicadas*/
-	public Body(String id, Vector2D velocity, Vector2D force, Vector2D position, double mass){
+	public Body(String id, Vector2D velocity, Vector2D position, double mass){
 		this.id = id;
 		this.velocity = velocity;
-		this.force = force;
 		this.position = position;
 		this.mass = mass;
 	}
@@ -24,7 +23,6 @@ public class Body {
 	public Body(Body createTheInstance) {
 		this.id = createTheInstance.id;
 		this.velocity = createTheInstance.velocity;
-		this.force = createTheInstance.force;
 		this.position = createTheInstance.position;
 		this.mass = createTheInstance.mass;
 	}
@@ -54,7 +52,7 @@ public class Body {
 	}
 	
 	void resetForce() {
-		force.minus(force);
+		force = new Vector2D();
 	}
 	
 	void move(double t) {

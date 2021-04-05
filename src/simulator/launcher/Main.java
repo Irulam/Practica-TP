@@ -130,7 +130,7 @@ public class Main {
 		cmdLineOptions.addOption(Option.builder("o").longOpt("output").hasArg().desc("Output file, where output is written. Default value: the standart output").build());
 		
 		//expected output
-		cmdLineOptions.addOption(Option.builder("eo").longOpt("expected-output").desc("The expected utput file. If not provided no comparision is applied").build());
+		cmdLineOptions.addOption(Option.builder("eo").longOpt("expected-output").hasArg().desc("The expected utput file. If not provided no comparision is applied").build());
 		
 		//steps
 		cmdLineOptions.addOption(Option.builder("s").longOpt("steps").hasArg().desc("An integer representing the number of simulation steps. Default value: 150 ").build());
