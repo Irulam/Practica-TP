@@ -49,11 +49,20 @@ public class Controller {
 		JSONArray jexpOutStates = null;
 		JSONArray jOutStates = new JSONArray();
 		
+		PrintStream printStream = new PrintStream(out);
+		
 		if (expOut != null) jexpOutStates = (new JSONObject(expOut)).getJSONArray("states"); 
+		
+		printStream.print("{ \"states\" : [ ");
 		
 		for (int i = 0; i <= n; ++i) {	
 			JSONObject s = _simulator.getState();
 			
+			if (i != 0) {
+				printStream.print(", ");
+			}
+			
+			printStream.print(s + "\n");
 			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {
 				throw new RunControllerException("El estado del paso " + i + "no es el esperado");
 			}
@@ -63,8 +72,9 @@ public class Controller {
 		}
 
 		JSONObject jOut = new JSONObject();
+		printStream.print(" ] }");
 		jOut.put("states", jOutStates);
-		PrintStream printStream = new PrintStream(out);
+		
 		printStream.print(jOut.toString());
 		printStream.close();
 	}

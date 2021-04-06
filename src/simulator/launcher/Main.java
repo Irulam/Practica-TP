@@ -228,12 +228,9 @@ public class Main {
 		
 	}
 
+	//cuando no se especifica el archivo la salida es la salida del sistema
 	private static void parseOutOption(CommandLine line) throws ParseException {
 		_outFile = line.getOptionValue("o");
-		if (_outFile == null) {
-			throw new ParseException("In batch mode an output file of bodies is required");
-		}
-		
 	}
 	
 	private static JSONObject parseWRTFactory(String v, Factory<?> factory) {
@@ -315,7 +312,6 @@ public class Main {
 		return new EpsilonEqualState(_epsDefaultValue);
 	}
 
-	//TODO: primero se ha tenido que seleccionar las leyes porque si no daría error
 	private static PhysicsSimulator createsSimulator() {
 		return new PhysicsSimulator(_dtime, _laws);
 	}
