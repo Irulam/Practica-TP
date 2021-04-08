@@ -5,7 +5,7 @@ import java.util.List;
 import simulator.misc.Vector2D;
 
 public class NewtonUniversalGravitation implements ForceLaws{
-	public static double GRAVITY = 0.667;
+	public static double GRAVITY = 6.67*Math.pow(10,-11);
 	
 	private Vector2D force(Body b1, Body b2) {
 		double difPositionsEsc = Math.abs(b2.getPosition().magnitude()-b1.getPosition().magnitude());

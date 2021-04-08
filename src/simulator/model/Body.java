@@ -55,6 +55,13 @@ public class Body {
 		force = new Vector2D();
 	}
 	
+	/*TODO: la velocidad si deberia cambiar porque solo depende del tiempo
+	 * y la posicion porque aunque la aceleracion sea 0 la velocidad no
+	 * el argumento de tiempo real que es el que se está recibiendo aqui 
+	 * parece que se esta imprimiendo todo el rato el primer paso de la simulación 
+	 * en el que estos valores no han cambiado
+	 */
+	
 	void move(double t) {
 		aceleration = new Vector2D(force.getX()/mass,force.getY()/mass);
 		Vector2D velocityAux = velocity.scale(t);
@@ -77,6 +84,7 @@ public class Body {
 		data.put("f", force);
 		return data;
 
+		// Vector2D f = createVector2D(info, "f");
 	}
 
 	public void setAcceleration(Vector2D newAceleration) {
