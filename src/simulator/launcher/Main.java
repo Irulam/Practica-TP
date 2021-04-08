@@ -206,7 +206,7 @@ public class Main {
 	private static void parseOutFileOption(CommandLine line) throws ParseException {
 		_eoutFile = line.getOptionValue("eo");
 		try {
-			if (_expOutFile != null) {
+			if (_eoutFile != null) {
 				_expOutFile = new FileInputStream(_eoutFile);
 			}
 		} catch (Exception e) {
@@ -309,7 +309,10 @@ public class Main {
 
 
 	private static StateComparator createsComparator() {
-		return new EpsilonEqualState(_epsDefaultValue);
+		double eps = _epsDefaultValue;
+		if (_stateComparatorInfo.getJSONObject("data").has("eps")) 
+			eps = _stateComparatorInfo.getJSONObject("data").getDouble("eps");
+		return new EpsilonEqualState(eps);
 	}
 
 	private static PhysicsSimulator createsSimulator() {

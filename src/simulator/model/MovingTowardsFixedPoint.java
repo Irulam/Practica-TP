@@ -10,7 +10,7 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	public void apply(List<Body> bodies) {
 		for (Body b : bodies) {
 			Vector2D dir = b.getPosition().direction();
-			b.setAcceleration(dir.scale(-ACCELERATION));
+			b.setForce(dir.scale(-ACCELERATION*b.getMass()));
 		}
 
 		

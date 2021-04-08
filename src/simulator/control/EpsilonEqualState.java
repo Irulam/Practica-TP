@@ -19,12 +19,12 @@ public class EpsilonEqualState implements StateComparator{
 		while(equal&&i<bodiesS1.length()) {
 			JSONObject bodyS1 = bodiesS1.getJSONObject(i);
 			JSONObject bodyS2 = bodiesS2.getJSONObject(i);
-			 
+			
 			equal = bodyS1.get("id").equals(bodyS2.get("id")) &&
-					equalModuleEps(bodyS1.getDouble("mass"),bodyS2.getDouble("mass")) &&
-					equalModuleEps((Vector2D) bodyS1.get("p"),(Vector2D) bodyS2.get("p")) &&
-					equalModuleEps((Vector2D) bodyS1.get("v"),(Vector2D) bodyS2.get("v")) &&
-					equalModuleEps((Vector2D) bodyS1.get("f"),(Vector2D) bodyS2.get("f"));
+					// equalModuleEps(bodyS1.getDouble("m"),bodyS2.getDouble("m")) &&
+					// equalModuleEps(bodyS1.getJSONArray("p"), bodyS2.getJSONArray("p")) &&
+					// equalModuleEps(bodyS1.getJSONArray("v"), bodyS2.getJSONArray("v")) &&
+					equalModuleEps(bodyS1.getJSONArray("f"), bodyS2.getJSONArray("f"));
 			i++;
 		}
 		
@@ -36,6 +36,10 @@ public class EpsilonEqualState implements StateComparator{
 	}
 	
 	private boolean equalModuleEps(Vector2D v1, Vector2D v2){
-		return v1.distanceTo(v2)<=eps;
+		return v1.distanceTo(v2) <= eps;
+	}
+	
+	private boolean equalModuleEps(JSONArray v1, JSONArray v2) {
+		return equalModuleEps(new Vector2D(v1.getDouble(0), v1.getDouble(1)), new Vector2D(v2.getDouble(0), v2.getDouble(1)));
 	}
 }

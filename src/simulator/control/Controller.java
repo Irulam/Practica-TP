@@ -51,31 +51,28 @@ public class Controller {
 		
 		PrintStream printStream = new PrintStream(out);
 		
-		if (expOut != null) jexpOutStates = (new JSONObject(expOut)).getJSONArray("states"); 
+		printStream.println("{ \"states\":[ ");
 		
-		printStream.print("{ \"states\" : [ ");
+		if (expOut != null) {
+			JSONObject auxJo = (new JSONObject(new JSONTokener(expOut)));
+			jexpOutStates = auxJo.getJSONArray("states"); 
+		}
 		
 		for (int i = 0; i <= n; ++i) {	
 			JSONObject s = _simulator.getState();
 			
-			if (i != 0) {
-				printStream.print(", ");
-			}
-			
-			printStream.print(s + "\n");
-			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {
-				throw new RunControllerException("El estado del paso " + i + "no es el esperado");
-			}
-			
 			jOutStates.put(s);
+			printStream.print(s.toString(2));
+			printStream.println((i!=n)?",":"");
+			
+			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {
+				throw new RunControllerException("El estado del paso " + i + " no es el esperado");
+			}
+			
 			_simulator.advance();
 		}
-
-		JSONObject jOut = new JSONObject();
-		printStream.print(" ] }");
-		jOut.put("states", jOutStates);
 		
-		printStream.print(jOut.toString());
+		printStream.print("]}");
 		printStream.close();
 	}
 	

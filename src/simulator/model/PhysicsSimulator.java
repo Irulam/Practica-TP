@@ -36,7 +36,6 @@ public class PhysicsSimulator {
 		}
 		
 		tActual += tReal;
-
 	}
 	
 	public void resetForce() {

@@ -9,7 +9,6 @@ public class Body {
 	private Vector2D force;
 	private Vector2D position;
 	private double mass;
-	private Vector2D aceleration;
 	
 	/*Cuando se les solicita se pueden mover. Al moverse cambian sus parámtros de acuerdo a 
 	las leyes físicas aplicadas*/
@@ -18,6 +17,7 @@ public class Body {
 		this.velocity = velocity;
 		this.position = position;
 		this.mass = mass;
+		this.force = new Vector2D();
 	}
 	
 	public Body(Body createTheInstance) {
@@ -63,37 +63,45 @@ public class Body {
 	 */
 	
 	void move(double t) {
-		aceleration = new Vector2D(force.getX()/mass,force.getY()/mass);
+		Vector2D aceleration = new Vector2D();
+		
+		if (mass != 0.0) {
+			aceleration = force.scale(1.0/mass);	
+		}
+		
+		Vector2D velPrev = velocity;
+
+		velocity = velocity.plus(aceleration.scale(t));
+		position = position.plus(velPrev.scale(t)).plus(aceleration.scale(0.5*Math.pow(t, 2)));
+		
+		/*
 		Vector2D velocityAux = velocity.scale(t);
-		Vector2D acelerationAux = aceleration.scale((1/2)*Math.pow(t,2));
+		Vector2D acelerationAux = aceleration.scale((1.0/2.0)*Math.pow(t,2.0));
 		Vector2D acelerationAux2 = aceleration.scale(t);
 	    
-		position.plus(velocityAux);
-		position.plus(acelerationAux);
-		velocity.plus(acelerationAux2);		
+		position = position.plus(velocityAux);
+		position = position.plus(acelerationAux);
+		velocity = velocity.plus(acelerationAux2);
+		*/	
 	}
-	
-	/*TODO: quizas hay que usar asJSONArray 
-	 */
+
 	public JSONObject getState() {
 		JSONObject data = new JSONObject();
 		data.put("id", id);
 		data.put("m", mass);
-		data.put("p", position);
-		data.put("v", velocity);
-		data.put("f", force);
+		data.put("p", position.asJSONArray());
+		data.put("v", velocity.asJSONArray());
+		data.put("f", force.asJSONArray());
 		return data;
 
-		// Vector2D f = createVector2D(info, "f");
 	}
 
-	public void setAcceleration(Vector2D newAceleration) {
-		aceleration = newAceleration;
-		
-	}
-	
 	public String toString() {
 		return getState().toString();
+	}
+
+	public void setForce(Vector2D fab) {
+		force = new Vector2D(fab);
 	}
 	
 }
