@@ -241,7 +241,7 @@ public class Main {
 		// into variables 'type' and 'data'
 		//
 		int i = v.indexOf(":");
-		JSONObject info = new JSONObject();
+		JSONObject infoData = new JSONObject();
 		String type = null;
 		String data = null;
 		if (i != -1) {
@@ -257,7 +257,7 @@ public class Main {
 		for (JSONObject fe : factory.getInfo()) {
 			if (type.equals(fe.getString("type"))) {
 				found = true;
-				info = fe;
+				infoData = fe.getJSONObject("data");
 				break;
 			}
 		}
@@ -266,10 +266,10 @@ public class Main {
 		JSONObject jo = null;
 		if (found) {
 			JSONObject jdata = new JSONObject(data);
-					
-			for (String key : info.keySet()) {
+
+			for (String key : infoData.keySet()) {
 				if (!jdata.has(key)) {
-					jdata.put(key, info.get(key));
+					jdata.put(key, infoData.get(key));
 				}
 			}
 			
