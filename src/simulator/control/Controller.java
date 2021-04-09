@@ -84,9 +84,10 @@ public class Controller {
 	public Factory<ForceLaws> getGravityLawsFactory() {
 		return this._laws;
 	}
-	
+	/*
 	public void setForceLaws(JSONObject info) {
 		this._simulator.setForceLaws(_laws.createInstance(info));
 	}
+	*/
 
 }

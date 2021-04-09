@@ -4,11 +4,11 @@ import org.json.JSONObject;
 import simulator.misc.Vector2D;
 
 public class Body {
-	private String id;
-	private Vector2D velocity;
-	private Vector2D force;
-	private Vector2D position;
-	private double mass;
+	protected String id;
+	protected Vector2D velocity;
+	protected Vector2D force;
+	protected Vector2D position;
+	protected double mass;
 	
 	/*Cuando se les solicita se pueden mover. Al moverse cambian sus parámtros de acuerdo a 
 	las leyes físicas aplicadas*/
@@ -55,13 +55,6 @@ public class Body {
 		force = new Vector2D();
 	}
 	
-	/*TODO: la velocidad si deberia cambiar porque solo depende del tiempo
-	 * y la posicion porque aunque la aceleracion sea 0 la velocidad no
-	 * el argumento de tiempo real que es el que se está recibiendo aqui 
-	 * parece que se esta imprimiendo todo el rato el primer paso de la simulación 
-	 * en el que estos valores no han cambiado
-	 */
-	
 	void move(double t) {
 		Vector2D aceleration = new Vector2D();
 		
@@ -72,17 +65,7 @@ public class Body {
 		Vector2D velPrev = velocity;
 
 		velocity = velocity.plus(aceleration.scale(t));
-		position = position.plus(velPrev.scale(t)).plus(aceleration.scale(0.5*Math.pow(t, 2)));
-		
-		/*
-		Vector2D velocityAux = velocity.scale(t);
-		Vector2D acelerationAux = aceleration.scale((1.0/2.0)*Math.pow(t,2.0));
-		Vector2D acelerationAux2 = aceleration.scale(t);
-	    
-		position = position.plus(velocityAux);
-		position = position.plus(acelerationAux);
-		velocity = velocity.plus(acelerationAux2);
-		*/	
+		position = position.plus(velPrev.scale(t)).plus(aceleration.scale(0.5*Math.pow(t, 2)));	
 	}
 
 	public JSONObject getState() {

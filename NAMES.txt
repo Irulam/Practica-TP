@@ -1,1 +1,29 @@
 Leidy Vanesa Vidales González
+Álvaro Cordero
+La práctica solo se puede entregar en un zip, no hay
+que incluir el subdirectorio bin
+
+set force de la clase body debería funcionar así?
+¿como sabemos en los archivos de prueba que un cuerpo es mlb?
+¿lossFactor y lossFrequency deberían ser protected (está como private)?
+Se lanza una excepcion en mlb pero no viene en el enunciado 
+
+cuando el comparador no sea igual 
+mostrar los valores esperados y los que dan en el paso de la simulación 
+
+a la hora de implementar el método apply de las leyes de fuerza 
+en el caso en el que la masa es cero. 
+¿Es correcto que pongamos la fuerza directamente a 0
+ pero que luego a la hora de moverse el cuerpo se pongan a cero velocidad 
+ y aceleración o deberíamos cambiarlo y que se ponga todo directamente a 0?
+ (El profesor responde que hay que probar pero le suena
+  que la primera opción es mejor)
+  
+  Antes el tiempo actual del simulador no se inicializaba a cero 
+  pero era cero al principio ¿qué pasaba? 
+  
+ Tenía un comentario en el simulador que ponia lo siguiente:
+ "Es posible cambiar las leyes de fuerza gracias a este método,
+  no sale en el enunciado pero he asumido 
+  que está porque cada vez que avanza el simulador resetea las leyes de fuerza"
+  supongo que no entendía que se reseteaba solo la fuerza y no las leyes de fuerza

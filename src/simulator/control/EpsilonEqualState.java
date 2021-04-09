@@ -21,9 +21,9 @@ public class EpsilonEqualState implements StateComparator{
 			JSONObject bodyS2 = bodiesS2.getJSONObject(i);
 			
 			equal = bodyS1.get("id").equals(bodyS2.get("id")) &&
-					// equalModuleEps(bodyS1.getDouble("m"),bodyS2.getDouble("m")) &&
-					// equalModuleEps(bodyS1.getJSONArray("p"), bodyS2.getJSONArray("p")) &&
-					// equalModuleEps(bodyS1.getJSONArray("v"), bodyS2.getJSONArray("v")) &&
+					 equalModuleEps(bodyS1.getDouble("m"),bodyS2.getDouble("m")) &&
+					 equalModuleEps(bodyS1.getJSONArray("p"), bodyS2.getJSONArray("p")) &&
+					 equalModuleEps(bodyS1.getJSONArray("v"), bodyS2.getJSONArray("v")) &&
 					equalModuleEps(bodyS1.getJSONArray("f"), bodyS2.getJSONArray("f"));
 			i++;
 		}
