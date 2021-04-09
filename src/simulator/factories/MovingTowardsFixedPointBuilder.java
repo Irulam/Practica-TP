@@ -30,7 +30,7 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
 		
-		return new MovingTowardsFixedPoint();
+		return new MovingTowardsFixedPoint(jo.getDouble("g"));
 	}
 
 }

@@ -241,6 +241,7 @@ public class Main {
 		// into variables 'type' and 'data'
 		//
 		int i = v.indexOf(":");
+		JSONObject info = new JSONObject();
 		String type = null;
 		String data = null;
 		if (i != -1) {
@@ -256,6 +257,7 @@ public class Main {
 		for (JSONObject fe : factory.getInfo()) {
 			if (type.equals(fe.getString("type"))) {
 				found = true;
+				info = fe;
 				break;
 			}
 		}
@@ -263,12 +265,20 @@ public class Main {
 		// build a corresponding JSON for that data, if found
 		JSONObject jo = null;
 		if (found) {
+			JSONObject jdata = new JSONObject(data);
+					
+			for (String key : info.keySet()) {
+				if (!jdata.has(key)) {
+					jdata.put(key, info.get(key));
+				}
+			}
+			
 			jo = new JSONObject();
-			jo.put("type", type);
-			jo.put("data", new JSONObject(data));
+			jo.put("type", type);			
+			jo.put("data", jdata);
 		}
+		
 		return jo;
-
 	}
 
 	private static void parseForceLawsOption(CommandLine line) throws ParseException {

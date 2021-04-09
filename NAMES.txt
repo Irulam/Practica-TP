@@ -1,4 +1,3 @@
 Leidy Vanesa Vidales González
-Álvaro Cordera
 La práctica solo se puede entregar en un zip, no hay
 que incluir el subdirectorio bin
