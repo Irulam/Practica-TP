@@ -24,7 +24,6 @@ public class BasicBodyBuilder extends Builder<Body>{
 		Vector2D v = createVector2D(info, "v");
 		
 		return new Body(id, v, p, m);
-
 	}
 	
 	@Override

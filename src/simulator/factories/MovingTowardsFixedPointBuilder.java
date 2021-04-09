@@ -12,14 +12,14 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 	}
 	
 	public MovingTowardsFixedPointBuilder() {
-		super("mtcp", "moving towards fixed point");
+		super("mtfp", "moving towards fixed point");
 	}
 
 	@Override
 	public JSONObject getBuilderInfo() {
 		JSONObject info = new JSONObject();
 		JSONObject data = new JSONObject();
-		info.put("type","mtcp");
+		info.put("type","mtfp");
 		data.put("c",new double [] {0.0});
 		data.put("g",9.81);
 		info.put("data",data);

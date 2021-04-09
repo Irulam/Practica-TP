@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import simulator.model.Body;
 import simulator.model.MassLossingBody;
 
+
 public class MassLossingBodyBuilder extends BasicBodyBuilder{
 
 	public MassLossingBodyBuilder() {
@@ -29,10 +30,10 @@ public class MassLossingBodyBuilder extends BasicBodyBuilder{
 
 	@Override
 	protected Body createTheInstance(JSONObject info) {
-		double lossFrequency = info.getDouble("freq");
 		double lossFactor = info.getDouble("factor");
+		double lossFrequency = info.getDouble("freq");
 		
-		return new MassLossingBody(super.createTheInstance(info), lossFrequency, lossFactor);	
+		return new MassLossingBody(super.createTheInstance(info), lossFactor, lossFrequency);	
 	}
 
 }

@@ -65,8 +65,10 @@ public class Controller {
 			printStream.print(s.toString(2));
 			printStream.println((i!=n)?",":"");
 			
-			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {
-				throw new RunControllerException("El estado del paso " + i + " no es el esperado");
+			if (expOut != null && !cmp.equal(s, jexpOutStates.getJSONObject(i))) {		
+				throw new RunControllerException("El estado del paso " + i + " no es el esperado, se esperaba:\n" +
+					jexpOutStates.getJSONObject(i).toString(2)
+				);
 			}
 			
 			_simulator.advance();
@@ -84,10 +86,4 @@ public class Controller {
 	public Factory<ForceLaws> getGravityLawsFactory() {
 		return this._laws;
 	}
-	/*
-	public void setForceLaws(JSONObject info) {
-		this._simulator.setForceLaws(_laws.createInstance(info));
-	}
-	*/
-
 }

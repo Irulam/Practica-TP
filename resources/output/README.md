@@ -24,7 +24,7 @@
 
 * check epsilon-equivalence (with eps=0.1) using the commnd-line
 
-  -i resources/examples/ex1.2body.json -eo resources/output/out.2.json -s 10000 -dt 10000 -fl mtfp-cmp espeq:{eps:0.1}
+  -i resources/examples/ex1.2body.json -eo resources/output/out.2.json -s 10000 -dt 10000 -fl mtfp -cmp espeq:{eps:0.1}
 
 # out.3.json
 

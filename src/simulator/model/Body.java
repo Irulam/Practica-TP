@@ -3,6 +3,7 @@ import org.json.JSONObject;
 
 import simulator.misc.Vector2D;
 
+
 public class Body {
 	protected String id;
 	protected Vector2D velocity;
@@ -25,6 +26,7 @@ public class Body {
 		this.velocity = createTheInstance.velocity;
 		this.position = createTheInstance.position;
 		this.mass = createTheInstance.mass;
+		this.force = createTheInstance.force;
 	}
 
 	public String getId() {
@@ -82,9 +84,14 @@ public class Body {
 	public String toString() {
 		return getState().toString();
 	}
-
+	
 	public void setForce(Vector2D fab) {
 		force = new Vector2D(fab);
+	}
+
+	public void resetVelocity() {
+		velocity = new Vector2D();
+		
 	}
 	
 }
