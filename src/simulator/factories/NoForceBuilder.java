@@ -17,7 +17,7 @@ public class NoForceBuilder extends Builder<ForceLaws>{
 		JSONObject data = new JSONObject();
 		info.put("type", "ng");
 		//TODO: no es lo que pone en el enunciado, preguntar
-		info.put("data", "{}");
+		info.put("data", data);
 		info.put("desc", "No force");
 		return info;
 	}
