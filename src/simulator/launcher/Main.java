@@ -8,6 +8,8 @@ import java.io.OutputStream;
 //import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -33,6 +35,7 @@ import simulator.factories.NoForceBuilder;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
 import simulator.model.PhysicsSimulator;
+import simulator.view.MainWindow;
 
 public class Main {
 
@@ -60,7 +63,9 @@ public class Main {
 	private static Factory<ForceLaws> _forceLawsFactory;
 	private static Factory<StateComparator> _stateComparatorFactory;
 
-	//inicializa las factorías de los cuerpos, leyes y comparadores
+	//modo batch o gui
+	private static Boolean _batchMode = null;
+
 	private static void init() {
 		ArrayList<Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
@@ -154,7 +159,11 @@ public class Main {
 						+ factoryPossibleValues(_stateComparatorFactory) + ". Default value: '"
 						+ _stateComparatorDefaultValue + "'.")
 				.build());
-
+		
+		//mode
+		cmdLineOptions.addOption(Option.builder("m").longOpt("mode").hasArg().desc("Execution Mode. Possible values: 'batch' (Batch mode), 'gui' (Graphical user interface mode). Default value: 'batch'.").build());
+				
+		
 		return cmdLineOptions;
 	}
 
@@ -186,7 +195,7 @@ public class Main {
 
 	private static void parseInFileOption(CommandLine line) throws ParseException {
 		_inFile = line.getOptionValue("i");
-		if (_inFile == null) {
+		if (_inFile == null && _batchMode) {
 			throw new ParseException("In batch mode an input file of bodies is required");
 		}
 	}
@@ -224,8 +233,18 @@ public class Main {
 		} catch (Exception e) {
 			throw new ParseException("Invalid step value: " + s);
 		}
-
+	}
+	
+	private static void parseModeOption(CommandLine line) throws ParseException { 
+		String m = line.getOptionValue("m");
 		
+		if (m == null) {
+			_batchMode = true;
+		} else {
+			if (!m.equalsIgnoreCase("batch") && !m.equalsIgnoreCase("gui")) 
+				throw new ParseException("Mode should be either batch or gui");
+			_batchMode = m.equalsIgnoreCase("batch");			
+		}
 	}
 
 	//cuando no se especifica el archivo la salida es la salida del sistema
@@ -241,7 +260,6 @@ public class Main {
 		// into variables 'type' and 'data'
 		//
 		int i = v.indexOf(":");
-		JSONObject infoData = new JSONObject();
 		String type = null;
 		String data = null;
 		if (i != -1) {
@@ -257,7 +275,6 @@ public class Main {
 		for (JSONObject fe : factory.getInfo()) {
 			if (type.equals(fe.getString("type"))) {
 				found = true;
-				infoData = fe.getJSONObject("data");
 				break;
 			}
 		}
@@ -265,20 +282,12 @@ public class Main {
 		// build a corresponding JSON for that data, if found
 		JSONObject jo = null;
 		if (found) {
-			JSONObject jdata = new JSONObject(data);
-
-			for (String key : infoData.keySet()) {
-				if (!jdata.has(key)) {
-					jdata.put(key, infoData.get(key));
-				}
-			}
-			
 			jo = new JSONObject();
-			jo.put("type", type);			
-			jo.put("data", jdata);
+			jo.put("type", type);
+			jo.put("data", new JSONObject(data));
 		}
-		
 		return jo;
+
 	}
 
 	private static void parseForceLawsOption(CommandLine line) throws ParseException {
@@ -316,6 +325,23 @@ public class Main {
 		}
 
 	}
+	
+	//TODO: En el gui mode hay que poner también el comparador?
+	private static void startGUIMode() throws Exception {
+		PhysicsSimulator simulator = createsSimulator();
+		Controller controller = createsController(simulator);
+		
+		SwingUtilities.invokeAndWait(new Runnable() {
+			@Override
+			public void run() {
+				(new MainWindow(controller)).setVisible(true);
+			}
+		});
+		
+		// Para el parámetro -i
+		if (_inFile != null) controller.loadBodies(new FileInputStream(_inFile));
+
+	}
 
 
 	private static StateComparator createsComparator() {
@@ -331,7 +357,8 @@ public class Main {
 
 	//forceLawsInfo se ha rellenado en la opción para seleccionar las leyes de fuerza
 	private static Controller createsController(PhysicsSimulator simulator) {
-		Controller controller = new Controller(simulator, _bodyFactory);
+		//TODO: cambiar el null del parámetro de la factoria de leyes de fuerza
+		Controller controller = new Controller(simulator, _bodyFactory, null);
 		
 		return controller;
 
@@ -339,10 +366,15 @@ public class Main {
 
 	private static void start(String[] args) throws Exception {
 		parseArgs(args);
-		startBatchMode();
+		if (_batchMode) {
+			startBatchMode();
+		}
+		else {
+			startGUIMode();
+		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		try {
 			init();
 			start(args);

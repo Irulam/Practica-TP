@@ -20,17 +20,19 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 		JSONObject info = new JSONObject();
 		JSONObject data = new JSONObject();
 		info.put("type","mtfp");
-		data.put("c",new double [] {0.0});
-		data.put("g",9.81);
+		//data.put("c",new double [] {0.0});
+		//data.put("g",9.81);
+		data.put("c","the point towards which bodies move (a json list of 2 numbers");
+		data.put("g","the length of the acceleration vector (a number)");
 		info.put("data",data);
-		info.put("desc", "moving towards fixed point");
+		info.put("desc", "Moving towards fixed point");
 		return info;
 	}
 
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
 		
-		return new MovingTowardsFixedPoint(jo.getDouble("g"));
+		return new MovingTowardsFixedPoint();
 	}
 
 }
