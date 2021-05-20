@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
@@ -24,6 +25,8 @@ public class Viewer extends JComponent implements SimulatorObserver {
 	private static final int CROSS_RADIUS = 5;
 	private static final int BODY_TAM = 5;
 	private static final int VECTOR_LENGTH = 20;
+	private static final int ARROW_W = 3;
+	private static final int ARROW_H = 3;
 
 	private int _centerX;
 	private int _centerY;
@@ -43,6 +46,7 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		_scale = 1.0;
 		_showHelp = true;
 		_showVectors = true;
+		setBorder(BorderFactory.createTitledBorder("Visor de cuerpos"));
 		addKeyListener(new KeyListener() {
 			//...
 			@Override
@@ -148,8 +152,8 @@ public class Viewer extends JComponent implements SimulatorObserver {
 				int scaledy = _centerY - (int) (y/_scale);
 				if (_showVectors) {
 					gr.setStroke(new BasicStroke(2));
-					drawLineWithArrow(gr,scaledx, scaledy, scaledx+u, scaledy-v, VECTOR_LENGTH,VECTOR_LENGTH, Color.GREEN, Color.GREEN);
-					drawLineWithArrow(gr,scaledx, scaledy, scaledx+w, scaledy-t, VECTOR_LENGTH,VECTOR_LENGTH, Color.RED, Color.RED);
+					drawLineWithArrow(gr,scaledx, scaledy, scaledx+u, scaledy-v, ARROW_W, ARROW_H, Color.GREEN, Color.GREEN);
+					drawLineWithArrow(gr,scaledx, scaledy, scaledx+w, scaledy-t, ARROW_W, ARROW_H, Color.RED, Color.RED);
 				}
 				
 				//Dibuja los cuerpos como tal
@@ -207,32 +211,30 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		g.setColor(arrowColor);
 		g.fillPolygon(xpoints, ypoints, 3);
 	}
-	@Override
-	public void onRegister(List<Body> bodies, double time, double tReal, String fLawsDesc) {
+	
+	private void updateAndRepaint(List<Body> bodies) {
 		_bodies = bodies;
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				autoScale();
+				repaint();
 			}
 		});
-
-		
+	}
+	
+	@Override
+	public void onRegister(List<Body> bodies, double time, double tReal, String fLawsDesc) {
+		updateAndRepaint(bodies);
 	}
 
 	@Override
 	public void onReset(List<Body> bodies, double time, double tReal, String fLawsDesc) {
-		onRegister(bodies, time, tReal, fLawsDesc);
+		updateAndRepaint(bodies);
 	}
 
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) {
-		_bodies = bodies;
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				autoScale();
-			}
-		});
-
+		updateAndRepaint(bodies);
 	}
 
 	@Override

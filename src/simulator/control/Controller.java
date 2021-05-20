@@ -21,9 +21,10 @@ public class Controller {
 	private Factory<ForceLaws> _laws;
 	
 	//Recibe al simulador y una factoría de cuerpos
-	public Controller(PhysicsSimulator simulator, Factory<Body> factory, Factory<ForceLaws> _laws) {
+	public Controller(PhysicsSimulator simulator, Factory<Body> factory, Factory<ForceLaws> laws) {
 		_simulator = simulator;
 		_factory = factory;
+		_laws = laws;
 	}
 	
 	/*Carga los cuerpos dados en formato JSON
@@ -77,10 +78,6 @@ public class Controller {
 
 	public void resetForce() {
 		_simulator.resetForce();
-	}
-
-	public Factory<ForceLaws> getGravityLawsFactory() {
-		return this._laws;
 	}
 
 	

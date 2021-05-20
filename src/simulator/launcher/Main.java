@@ -359,7 +359,7 @@ public class Main {
 	//forceLawsInfo se ha rellenado en la opción para seleccionar las leyes de fuerza
 	private static Controller createsController(PhysicsSimulator simulator) {
 		//TODO: cambiar el null del parámetro de la factoria de leyes de fuerza
-		Controller controller = new Controller(simulator, _bodyFactory, null);
+		Controller controller = new Controller(simulator, _bodyFactory, _forceLawsFactory);
 		
 		return controller;
 
