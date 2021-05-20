@@ -26,9 +26,9 @@ public class StatusBar extends JPanel implements SimulatorObserver {
 	private void initGUI() {
 		this.setLayout( new FlowLayout( FlowLayout.LEFT ));
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
-		_panel.add(_currTime = new JLabel());
-		_panel.add(_numOfBodies = new JLabel());
-		_panel.add(_currLaws = new JLabel());
+		add(_currTime = new JLabel());
+		add(_numOfBodies = new JLabel());
+		add(_currLaws = new JLabel());
 	}
 
 	@Override
@@ -76,6 +76,10 @@ public class StatusBar extends JPanel implements SimulatorObserver {
 				_currLaws.setText("Laws: " + fLawsDesc);
 			}
 		});	
+	}
+	public Object getProgressBar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

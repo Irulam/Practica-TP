@@ -33,13 +33,13 @@ public class Viewer extends JComponent implements SimulatorObserver {
 	private boolean _showVectors;
 	
 	Viewer(Controller ctrl){
+		_bodies = new ArrayList<>();
 		initGUI();
 		ctrl.addObserver(this);
 	}
 	
 	private void initGUI() {
 		// TODO add border with title
-		_bodies = new ArrayList<>();
 		_scale = 1.0;
 		_showHelp = true;
 		_showVectors = true;
@@ -175,7 +175,7 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		}
 	}
 	
-	private void autoScale() {
+	void autoScale() {
 		double max = 1.0;
 		for (Body b : _bodies) {
 			Vector2D p = b.getPosition();

@@ -19,10 +19,11 @@ public class BodiesTable extends JPanel{
 
 	BodiesTable(Controller ctrl) {
 		setLayout(new BorderLayout());
+		_ctrl = ctrl; 
 		setBorder(BorderFactory.createTitledBorder(
-		BorderFactory.createLineBorder(Color.black, 2),
-		"Bodies",
-		TitledBorder.LEFT, TitledBorder.TOP));
+				BorderFactory.createLineBorder(Color.black, 2),
+				"Bodies",
+				TitledBorder.LEFT, TitledBorder.TOP));
 		_tableModel = new BodiesTableModel(_ctrl); 
 		_table = new JTable(_tableModel);
 		_table.setFillsViewportHeight(true);
