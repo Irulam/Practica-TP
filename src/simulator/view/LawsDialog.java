@@ -22,7 +22,6 @@ public class LawsDialog extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String title = "Change gravity laws";
 	private Controller _ctrl;
-	private LawsTableModel _ltm;
 	
 	public LawsDialog(Controller ctrl) {
 		super();
@@ -49,7 +48,13 @@ public class LawsDialog extends JDialog implements ActionListener {
 		}
 		//Componente para seleccionar el tipo de fuerza
 	    selectForce = new JComboBox(options.toArray());
-	   
+		String selection = (String) selectForce.getSelectedItem();
+		
+		for (JSONObject jo: _ctrl.getForceLawsInfo()) {
+			if (jo.getString("desc").equals(selection)) {
+				_ctrl.setForceLaws(jo);
+			}
+		}
 		/*
 		String response = (String) JOptionPane.showInputDialog(this, "Select gravity laws to be used.",
 				"Gravity Laws Selector", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), null);
@@ -68,21 +73,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Tres opciones para pasar como options al inputDialog:
-				// 1. Usar ForceLaws -> Tienes que crear un metodo setForceLaws(ForceLaws) en lugar de JSON
-				// 2. Usar JSONObject -> ??? -> Pasar JSONObject
-				// 3. Usar Strings? -> Hace falta convertir luego de String a JSONObject igualmente
-				
-				/*
-				String selection = (String) selectForce.getSelectedItem();
-				
-				for (JSONObject jo: _ctrl.getForceLawsInfo()) {
-					if (jo.getString("desc").equals(selection)) {
-						_ctrl.setForceLaws(jo);
-					}
-				}*/
-				_ctrl.setForceLaws(null); // _ltm.obtenerForceLawsSeleccionadoConSusDatosyTodaLaPesca());
-				setVisible(false);
+			
 			}
 		} );
 		
