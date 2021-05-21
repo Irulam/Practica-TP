@@ -39,8 +39,12 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
 		double g = jo.optDouble("g", 9.81);
-		double[] c = toDouble(jo.optJSONArray("c"));
-		if (c == null) c = new double[] {0.0};
+		JSONArray jc = jo.optJSONArray("c");
+		double[] c = new double[] {0.0};
+		if (jc != null) {
+			c = toDouble(jc);
+		}
+			
 		return new MovingTowardsFixedPoint(g, c);
 	}
 	

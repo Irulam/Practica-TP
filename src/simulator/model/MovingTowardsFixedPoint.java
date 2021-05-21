@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import simulator.misc.Vector2D;
@@ -22,6 +23,6 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	}
 	//TODO: cambiar la string cuando esté bien hecho este método
 	public String toString() {
-		return "Moving Towards " + c +" with constant acceleration "+ g;
+		return "Moving Towards " + Arrays.toString(c) +" with constant acceleration "+ g;
 	}
 }
