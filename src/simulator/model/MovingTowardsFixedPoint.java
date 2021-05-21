@@ -6,12 +6,16 @@ import simulator.misc.Vector2D;
 
 public class MovingTowardsFixedPoint implements ForceLaws{
 	private double g = 9.81;
-	private 
+	private double c [] = new double [] {0.0};
+	public MovingTowardsFixedPoint(double g, double[] c) {
+		this.g = g;
+		this.c = c;
+	}
 	@Override
 	public void apply(List<Body> bodies) {
 		for (Body b : bodies) {
 			Vector2D dir = b.getPosition().direction();
-			b.setForce(dir.scale(-ACCELERATION*b.getMass()));
+			b.setForce(dir.scale(-g*b.getMass()));
 		}
 
 		

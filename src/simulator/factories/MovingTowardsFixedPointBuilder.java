@@ -1,5 +1,6 @@
 package simulator.factories;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.model.ForceLaws;
@@ -28,11 +29,21 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 		info.put("desc", "Moving towards fixed point");
 		return info;
 	}
-
-	@Override
-	protected ForceLaws createTheInstance(JSONObject jo) {
+	
+	protected double [] toDouble(JSONArray jarray) {
+		double[] darray = new double[jarray.length()];
+		for (int i = 0; i < jarray.length(); ++i)
+			darray[i] = jarray.getDouble(i);
 		
-		return new MovingTowardsFixedPoint();
+		return darray;
 	}
 
+	
+	@Override
+	protected ForceLaws createTheInstance(JSONObject jo) {
+		double g = jo.getDouble("g");
+		double[] c = toDouble(jo.getJSONArray("c"));	
+		return new MovingTowardsFixedPoint(g, c);
+	}
+	
 }
