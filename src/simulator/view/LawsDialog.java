@@ -33,6 +33,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
 		this.setPreferredSize(new Dimension (200,150));
+		this.setMinimumSize(this.getPreferredSize());
 		this.initGUI();
 	}
 
