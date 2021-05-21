@@ -173,6 +173,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	}
 
 	protected void changeLaws() {
+		new LawsDialog(_ctrl);
+		/*
 		ArrayList<String> options = new ArrayList<>();
 		for (JSONObject jo : _ctrl.getForceLawsInfo()) {
 			options.add(jo.getString("desc"));
@@ -191,6 +193,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 				_ctrl.setForceLaws(jo);
 			}
 		}
+		*/
 	}
 
 	// Crea un diálogo para abrir ficheros
