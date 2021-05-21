@@ -4,12 +4,16 @@ import java.util.List;
 
 import simulator.misc.Vector2D;
 
-public class NewtonUniversalGravitation implements ForceLaws{
-	public static double GRAVITY = 6.67e-11;
+public class NewtonUniversalGravitation implements ForceLaws {
+	private double _g;
+	
+	public NewtonUniversalGravitation(double g) {
+		_g = g;
+	}
 	
 	private Vector2D force(Body b1, Body b2) {
 		Vector2D dist = b2.getPosition().minus(b1.getPosition());
-		double force = GRAVITY*((b1.getMass()*b2.getMass())/(dist.magnitude()*dist.magnitude()));
+		double force = _g*((b1.getMass()*b2.getMass())/(dist.magnitude()*dist.magnitude()));
 		return dist.direction().scale(force);
 	}
 	
@@ -34,7 +38,7 @@ public class NewtonUniversalGravitation implements ForceLaws{
 	}
 	
 	public String toString() {
-		return "Newton Universal Gravitation with G: " + GRAVITY;
+		return "Newton Universal Gravitation with G: " + _g;
 	}
 	
 }

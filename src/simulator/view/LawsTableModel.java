@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 import org.json.JSONArray;
@@ -15,81 +16,67 @@ import simulator.control.Controller;
 import simulator.model.Body;
 import simulator.model.SimulatorObserver;
 
-public class LawsTableModel extends AbstractTableModel implements SimulatorObserver{
+public class LawsTableModel extends AbstractTableModel {
 	private static final String columnNames[] = {"Key", "Value", "Description"};
 	private JSONObject _info;
-	private String[] _keys;
-	private String[] _description;
-	private Map<String, Object> _map;
 	
-	LawsTableModel(Controller ctrl){
-		ctrl.addObserver(this);
+	LawsTableModel() {
+		
+	}
+	
+	LawsTableModel(JSONObject info) {
+		_info = info;
 	}
 	
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _info.getJSONObject("data").length();
 	}
 
 	@Override
 	public int getColumnCount() {
 		return columnNames.length;
 	}
+	
+	@Override
+	public String getColumnName(int columnIndex) {
+		return columnNames[columnIndex];
+	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+		String dataKey = _info.getJSONObject("data").names().getString(rowIndex);
+		
 		switch(columnIndex) {
-		case 0: return _keys[rowIndex];
-		//case 1: return _info.get(rowIndex).getMass();
-		case 2: return _description[rowIndex];
-		default: return null;
+			case 0: return dataKey;
+			// case 1: return _data.get(dataKey);
+			case 2: return _info.getJSONObject("data").getString(dataKey);
+			default: return null;
 		}
 	}
-	public void setInfo(JSONObject info) {
-		this._info = info;
-		_map = info.toMap();
-		_keys = (String[]) _map.keySet().toArray();
-		_description = (String[]) _map.values().toArray();
+	
+	@Override
+	public void setValueAt(Object val, int rowIndex, int columnIndex) {
+		String dataKey = _info.getJSONObject("data").names().getString(rowIndex);
+		// TODO: Donde esta el val
 	}
 	
-	public JSONObject getInfo() {
-		return _info;
-	}
 	@Override
-	public void onRegister(List<Body> bodies, double time, double tReal, String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return columnIndex == 1;
 	}
-
+	
+	public void setInfo(JSONObject info) {
+		this._info = info;
+		fireTableDataChanged();
+	}
+	
 	@Override
-	public void onReset(List<Body> bodies, double time, double tReal, String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
+	public void fireTableDataChanged() {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				LawsTableModel.super.fireTableDataChanged();
+			}
+		});
 	}
-
-	@Override
-	public void onBodyAdded(List<Body> bodies, Body b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onAdvance(List<Body> bodies, double time) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDeltaTimeChanged(double tReal) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onForceLawsChanged(String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

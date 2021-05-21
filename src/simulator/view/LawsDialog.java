@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import org.json.JSONObject;
 
@@ -22,12 +24,11 @@ public class LawsDialog extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String title = "Change gravity laws";
 	private Controller _ctrl;
-	private LawsTableModel _table;
+	private LawsTableModel _tableModel;
 	
 	public LawsDialog(Controller ctrl) {
 		super();
 		_ctrl = ctrl;
-		_table = new LawsTableModel(ctrl);
 		setTitle(title);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -41,23 +42,32 @@ public class LawsDialog extends JDialog implements ActionListener {
 		JComboBox selectForce;
 	    mainPanel.setLayout(new GridLayout(3,1));
 	    
-	    
-	    
 	    //Lista de leyes de fuerza
 		ArrayList<String> options = new ArrayList<>();
 		for (JSONObject jo : _ctrl.getForceLawsInfo()) {
 			options.add(jo.getString("desc"));
 		}
+		
 		//Componente para seleccionar el tipo de fuerza
 	    selectForce = new JComboBox(options.toArray());
-		String selection = (String) selectForce.getSelectedItem();
-		
-		for (JSONObject jo: _ctrl.getForceLawsInfo()) {
-			if (jo.getString("desc").equals(selection)) {
-				_ctrl.setForceLaws(jo);
-				_table.setInfo(jo);
+	    _tableModel = new LawsTableModel(_ctrl.getForceLawsInfo().get(0));
+	    JTable table = new JTable(_tableModel);
+
+		selectForce.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Action performed");
+				String selection = (String) selectForce.getSelectedItem();
+				
+				for (JSONObject jo: _ctrl.getForceLawsInfo()) {
+					if (jo.getString("desc").equals(selection)) {
+						_ctrl.setForceLaws(jo);
+						_tableModel.setInfo(jo);
+					}
+				}
 			}
-		}
+		});
+	
 		/*
 		String response = (String) JOptionPane.showInputDialog(this, "Select gravity laws to be used.",
 				"Gravity Laws Selector", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), null);
@@ -80,6 +90,8 @@ public class LawsDialog extends JDialog implements ActionListener {
 			}
 		} );
 		
+		JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		mainPanel.add(scrollPane);
 		buttons.add(cancel);
 		buttons.add(ok);
 		mainPanel.add(selectForce);
