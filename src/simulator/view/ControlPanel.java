@@ -173,7 +173,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	}
 
 	protected void changeLaws() {
-		new LawsDialog(_ctrl);
+		LawsDialog ld = new LawsDialog(_ctrl);
+		// Este codigo no se ejecuta hasta que se cierra
+		// _ctrl.setForceLaws(ld.getSelected());
+		
 		/*
 		ArrayList<String> options = new ArrayList<>();
 		for (JSONObject jo : _ctrl.getForceLawsInfo()) {

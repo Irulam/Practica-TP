@@ -19,22 +19,24 @@ import simulator.control.Controller;
 
 
 public class LawsDialog extends JDialog implements ActionListener {
-
-
 	private static final long serialVersionUID = 1L;
 	private static final String title = "Change gravity laws";
 	private Controller _ctrl;
+	private LawsTableModel _ltm;
 	
 	public LawsDialog(Controller ctrl) {
+		super();
 		_ctrl = ctrl;
 		setTitle(title);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
 		this.setPreferredSize(new Dimension (200,150));
+		this.initGUI();
 	}
 
 	protected void initGUI() {
 		JPanel mainPanel = new JPanel();
+		JPanel buttons = new JPanel();
 		JComboBox selectForce;
 	    mainPanel.setLayout(new GridLayout(3,1));
 	    
@@ -53,7 +55,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 				"Gravity Laws Selector", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), null);
   
   */
-	    String selection = (String) selectForce.getSelectedItem();
+
 		JButton cancel= new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -66,24 +68,31 @@ public class LawsDialog extends JDialog implements ActionListener {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				// Tres opciones para pasar como options al inputDialog:
 				// 1. Usar ForceLaws -> Tienes que crear un metodo setForceLaws(ForceLaws) en lugar de JSON
 				// 2. Usar JSONObject -> ??? -> Pasar JSONObject
 				// 3. Usar Strings? -> Hace falta convertir luego de String a JSONObject igualmente
 				
+				/*
+				String selection = (String) selectForce.getSelectedItem();
+				
 				for (JSONObject jo: _ctrl.getForceLawsInfo()) {
 					if (jo.getString("desc").equals(selection)) {
 						_ctrl.setForceLaws(jo);
 					}
-				}
-			
+				}*/
+				_ctrl.setForceLaws(null); // _ltm.obtenerForceLawsSeleccionadoConSusDatosyTodaLaPesca());
+				setVisible(false);
 			}
 		} );
 		
+		buttons.add(cancel);
+		buttons.add(ok);
 		mainPanel.add(selectForce);
+		mainPanel.add(buttons);
 		this.add(mainPanel);
 		this.setVisible(true);
+		
 	}
 
 	@Override
