@@ -27,7 +27,12 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	public int getColumnCount() {
 		return columnNames.length;
 	}
-
+	
+	@Override
+	public String getColumnName(int col) {
+		return columnNames[col];
+	}
+	
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(columnIndex) {

@@ -5,7 +5,8 @@ import java.util.List;
 import simulator.misc.Vector2D;
 
 public class MovingTowardsFixedPoint implements ForceLaws{
-	private static final double ACCELERATION = 9.81;
+	private double g = 9.81;
+	private 
 	@Override
 	public void apply(List<Body> bodies) {
 		for (Body b : bodies) {
@@ -17,6 +18,6 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 	}
 	//TODO: cambiar la string cuando esté bien hecho este método
 	public String toString() {
-		return "Moving Towards Fixed Point ";
+		return "Moving Towards " + c +" with constant acceleration "+ g;
 	}
 }

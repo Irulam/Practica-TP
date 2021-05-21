@@ -25,6 +25,5 @@ Los argumentos de main window no sé si tienen que ser private
 // TODO: QUITAR ZOOM
 // TODO: Delta time
 // TODO: Help String -> Ayuda
-// TODO: Columnas tablas
 // TODO: Force Laws selector se parece en una mierda
 // FIXME: No aparece en el statusbar la ley de la gravedad hasta que la cambias

@@ -46,13 +46,13 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		_scale = 1.0;
 		_showHelp = true;
 		_showVectors = true;
-		setBorder(BorderFactory.createTitledBorder("Visor de cuerpos"));
+		setBorder(BorderFactory.createTitledBorder("Viewer"));
 		addKeyListener(new KeyListener() {
 			//...
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyChar()) {
-					case '_':
+					case '-':
 						_scale = _scale * 1.1;
 						repaint();
 						break;
@@ -174,7 +174,7 @@ public class Viewer extends JComponent implements SimulatorObserver {
 			int paddingLeft = getBorder().getBorderInsets(this).left + 5;
 			int lineHeight = gr.getFontMetrics().getAscent() + 2;
 			int paddingTop = getBorder().getBorderInsets(this).top + lineHeight;
-			gr.drawString("Help String", paddingLeft, paddingTop);
+			gr.drawString("h:toggle help, v:toggle vectors,+:zoom-in,-:zoom_out,=:fit", paddingLeft, paddingTop);
 			gr.drawString("Scaling ratio: " + String.valueOf(_scale), paddingLeft, paddingTop + lineHeight);
 		}
 	}

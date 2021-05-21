@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
@@ -27,14 +29,17 @@ public class StatusBar extends JPanel implements SimulatorObserver {
 		this.setLayout( new FlowLayout( FlowLayout.LEFT ));
 		this.setBorder( BorderFactory.createBevelBorder( 1 ));
 		add(_currTime = new JLabel());
+		add(new JSeparator());
 		add(_numOfBodies = new JLabel());
+		add(new JSeparator());
 		add(_currLaws = new JLabel());
 	}
 
 	@Override
 	public void onRegister(List<Body> bodies, double time, double tReal, String fLawsDesc) {
-		// TODO Auto-generated method stub
-		
+		currTime(time);
+		numBodies(bodies);
+		currLaws(fLawsDesc);
 	}
 
 	@Override
@@ -45,35 +50,47 @@ public class StatusBar extends JPanel implements SimulatorObserver {
 
 	@Override
 	public void onBodyAdded(List<Body> bodies, Body b) {
+		numBodies(bodies);	
+	}
+	
+	private void numBodies(List<Body> bodies) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				_numOfBodies.setText("Bodies: " + bodies.size());
 			}
-		});		
+		});	
 	}
 
 	@Override
 	public void onAdvance(List<Body> bodies, double time) {
-		// TODO Auto-generated method stub
-		
+		currTime(time);	
 	}
-
-	@Override
-	public void onDeltaTimeChanged(double tReal) {
+	
+	private void currTime(double time) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				_currTime.setText("Time: " + tReal);
+				_currTime.setText("Time: " + time);
 				
 			}
 		});	
+	}
+	@Override
+	public void onDeltaTimeChanged(double tReal) {
+
 		
 	}
+	
 
 	@Override
 	public void onForceLawsChanged(String fLawsDesc) {
+		currLaws(fLawsDesc);
+	}
+	
+	private void currLaws(String fLawsDesc) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				_currLaws.setText("Laws: " + fLawsDesc);
+				
 			}
 		});	
 	}

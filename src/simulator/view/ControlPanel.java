@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
@@ -40,13 +41,15 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private Boolean _stopped;
 	private static final String ICONS_DIR = "resources/icons/";
 	private static final int SEPARATOR_PADDING = 0;
-	private static final Number DEFAULT_STEPS = 10;
+	private static final Number DEFAULT_STEPS = 10000;
 	private JButton _exitButton;
 	private JButton _openButton;
 	private JButton _runButton;
 	private JButton _stopButton;
 	private JButton _changeLawsButton;
 	private JSpinner _stepsField;
+	private JTextField _deltaField;
+	private int _delta;
 	private JFileChooser fileChooser;
 	private String fLawsDesc;
 
@@ -130,25 +133,34 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		ret.setToolTipText(toolTipText);
 		return ret;
 	}
+	
+	private void changeFieldSize(JComponent _stepsField) {
+		int h = _stepsField.getFontMetrics(_stepsField.getFont()).getHeight() + 10;
+		int w = _stepsField.getFontMetrics(_stepsField.getFont()).getMaxAdvance() * 4;
 
+		_stepsField.setPreferredSize(new Dimension(w, h));
+		_stepsField.setMaximumSize(new Dimension(w * 2, h));
+		_stepsField.setMinimumSize(new Dimension(w, h));
+	}
 	private JPanel createStepsInput() {
 		JPanel ret = new JPanel();
 		ret.setToolTipText("Number of steps to run");
 		ret.setLayout(new BoxLayout(ret, BoxLayout.X_AXIS));
 
 		JLabel label = new JLabel(" Ticks: ");
-		_stepsField = new JSpinner(new SpinnerNumberModel(DEFAULT_STEPS, 1, null, 10));
+		JLabel label_delta = new JLabel(" Delta-Time: ");
+		_stepsField = new JSpinner(new SpinnerNumberModel(DEFAULT_STEPS, 1, null, 100));
+		_deltaField = new JTextField("25000");
 
-		int h = _stepsField.getFontMetrics(_stepsField.getFont()).getHeight() + 10;
-		int w = _stepsField.getFontMetrics(_stepsField.getFont()).getMaxAdvance() * 5;
-
-		_stepsField.setPreferredSize(new Dimension(w, h));
-		_stepsField.setMaximumSize(new Dimension(w * 2, h));
-		_stepsField.setMinimumSize(new Dimension(w, h));
-
+		changeFieldSize(_stepsField);
+		changeFieldSize(_deltaField);
+		
 		ret.add(label);
 		ret.add(_stepsField);
-
+		add(createSeparator());
+		ret.add(label_delta);
+		ret.add(_deltaField);
+		
 		return ret;
 	}
 
@@ -233,7 +245,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private void run_sim(int n) {
 		if (n > 0 && !_stopped) {
 			try {
-				_ctrl.run(1);
+				_ctrl.run(Integer.parseInt(_deltaField.getText()));//1
 			} catch (Exception e) {
 				_stopped = true;
 				return;
