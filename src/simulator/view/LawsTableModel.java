@@ -19,6 +19,7 @@ import simulator.model.SimulatorObserver;
 public class LawsTableModel extends AbstractTableModel {
 	private static final String columnNames[] = {"Key", "Value", "Description"};
 	private JSONObject _info;
+	private JSONObject _val;
 	
 	LawsTableModel() {
 		
@@ -26,6 +27,7 @@ public class LawsTableModel extends AbstractTableModel {
 	
 	LawsTableModel(JSONObject info) {
 		_info = info;
+		_val = new JSONObject();
 	}
 	
 	@Override
@@ -49,7 +51,7 @@ public class LawsTableModel extends AbstractTableModel {
 		
 		switch(columnIndex) {
 			case 0: return dataKey;
-			// case 1: return _data.get(dataKey);
+			case 1: return _val.opt(dataKey);
 			case 2: return _info.getJSONObject("data").getString(dataKey);
 			default: return null;
 		}
@@ -57,8 +59,10 @@ public class LawsTableModel extends AbstractTableModel {
 	
 	@Override
 	public void setValueAt(Object val, int rowIndex, int columnIndex) {
-		String dataKey = _info.getJSONObject("data").names().getString(rowIndex);
-		// TODO: Donde esta el val
+		if (columnIndex == 1) {
+			String dataKey = _info.getJSONObject("data").names().getString(rowIndex);
+			_val.put(dataKey, val);
+		}
 	}
 	
 	@Override
@@ -67,8 +71,15 @@ public class LawsTableModel extends AbstractTableModel {
 	}
 	
 	public void setInfo(JSONObject info) {
-		this._info = info;
+		_info = info;
+		_val = new JSONObject();
 		fireTableDataChanged();
+	}
+	
+	public JSONObject getInfo() {
+		JSONObject ret =  new JSONObject(_info, JSONObject.getNames(_info));
+		ret.put("data", _val);
+		return ret;
 	}
 	
 	@Override

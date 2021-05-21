@@ -56,7 +56,6 @@ public class LawsDialog extends JDialog implements ActionListener {
 		selectForce.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Action performed");
 				String selection = (String) selectForce.getSelectedItem();
 				
 				for (JSONObject jo: _ctrl.getForceLawsInfo()) {
@@ -86,7 +85,8 @@ public class LawsDialog extends JDialog implements ActionListener {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+				_ctrl.setForceLaws(_tableModel.getInfo());
+				setVisible(false);
 			}
 		} );
 		
