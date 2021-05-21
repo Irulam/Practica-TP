@@ -150,7 +150,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		JLabel label = new JLabel(" Ticks: ");
 		JLabel label_delta = new JLabel(" Delta-Time: ");
 		_stepsField = new JSpinner(new SpinnerNumberModel(DEFAULT_STEPS, 1, null, 100));
-		_deltaField = new JTextField("25000");
+		_deltaField = new JTextField("25");
 
 		changeFieldSize(_stepsField);
 		changeFieldSize(_deltaField);

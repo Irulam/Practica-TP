@@ -21,7 +21,7 @@ public class MovingTowardsFixedPoint implements ForceLaws{
 
 		
 	}
-	//TODO: cambiar la string cuando esté bien hecho este método
+	
 	public String toString() {
 		return "Moving Towards " + Arrays.toString(c) +" with constant acceleration "+ g;
 	}

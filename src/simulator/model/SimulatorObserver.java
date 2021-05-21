@@ -2,7 +2,7 @@ package simulator.model;
 
 import java.util.List;
 
-//TODO: Pregunta muy importante sobre qué es el controlador
+
 /*Interfaz que permite la implementación del patrón Modelo 
 Vista Controlador en el simulador físico, la implementación 
 de esta interfaz permite notificar a las clases que lo necesiten sobre eventos que ocurren en el simulador.
