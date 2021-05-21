@@ -22,10 +22,12 @@ public class LawsDialog extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String title = "Change gravity laws";
 	private Controller _ctrl;
+	private LawsTableModel _table;
 	
 	public LawsDialog(Controller ctrl) {
 		super();
 		_ctrl = ctrl;
+		_table = new LawsTableModel(ctrl);
 		setTitle(title);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
@@ -53,6 +55,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		for (JSONObject jo: _ctrl.getForceLawsInfo()) {
 			if (jo.getString("desc").equals(selection)) {
 				_ctrl.setForceLaws(jo);
+				_table.setInfo(jo);
 			}
 		}
 		/*

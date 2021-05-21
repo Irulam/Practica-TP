@@ -3,6 +3,7 @@ package simulator.view;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,8 +18,9 @@ import simulator.model.SimulatorObserver;
 public class LawsTableModel extends AbstractTableModel implements SimulatorObserver{
 	private static final String columnNames[] = {"Key", "Value", "Description"};
 	private JSONObject _info;
-	private JSONArray _keys;
-	private JSONArray _description;
+	private String[] _keys;
+	private String[] _description;
+	private Map<String, Object> _map;
 	
 	LawsTableModel(Controller ctrl){
 		ctrl.addObserver(this);
@@ -38,16 +40,17 @@ public class LawsTableModel extends AbstractTableModel implements SimulatorObser
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch(columnIndex) {
-		case 0: return _keys.get(rowIndex);
-		case 1: return _info.get(rowIndex).getMass();
-		case 2: return _description.get(rowIndex);
+		case 0: return _keys[rowIndex];
+		//case 1: return _info.get(rowIndex).getMass();
+		case 2: return _description[rowIndex];
 		default: return null;
 		}
 	}
 	public void setInfo(JSONObject info) {
 		this._info = info;
-		_keys = info.names();
-		_description = info.
+		_map = info.toMap();
+		_keys = (String[]) _map.keySet().toArray();
+		_description = (String[]) _map.values().toArray();
 	}
 	
 	public JSONObject getInfo() {
