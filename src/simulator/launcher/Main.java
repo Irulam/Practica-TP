@@ -30,10 +30,12 @@ import simulator.factories.Factory;
 import simulator.factories.MassEqualStateBuilder;
 import simulator.factories.MassLossingBodyBuilder;
 import simulator.factories.MovingTowardsFixedPointBuilder;
+import simulator.factories.NewthousandtonUniversalGravitationBuilder;
 import simulator.factories.NewtonUniversalGravitationBuilder;
 import simulator.factories.NoForceBuilder;
 import simulator.model.Body;
 import simulator.model.ForceLaws;
+import simulator.model.NewthousandtonUniversalGravitation;
 import simulator.model.PhysicsSimulator;
 import simulator.view.MainWindow;
 
@@ -75,7 +77,8 @@ public class Main {
 		ArrayList<Builder<ForceLaws>> gravityLawsBuilders = new ArrayList<>();
 		gravityLawsBuilders.add(new NoForceBuilder());
 		gravityLawsBuilders.add(new MovingTowardsFixedPointBuilder());
-		gravityLawsBuilders.add(new NewtonUniversalGravitationBuilder());	
+		gravityLawsBuilders.add(new NewtonUniversalGravitationBuilder());
+		gravityLawsBuilders.add(new NewthousandtonUniversalGravitationBuilder());
 		_forceLawsFactory = new BuilderBasedFactory<>(gravityLawsBuilders);
 
 		ArrayList<Builder<StateComparator>> stateComparatorBuilders = new ArrayList<>();

@@ -1,20 +1,10 @@
 package simulator.view;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import simulator.control.Controller;
-import simulator.model.Body;
-import simulator.model.SimulatorObserver;
+
 
 public class LawsTableModel extends AbstractTableModel {
 	private static final String columnNames[] = {"Key", "Value", "Description"};

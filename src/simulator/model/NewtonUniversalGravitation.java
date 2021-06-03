@@ -11,7 +11,7 @@ public class NewtonUniversalGravitation implements ForceLaws {
 		_g = g;
 	}
 	
-	private Vector2D force(Body b1, Body b2) {
+	protected Vector2D force(Body b1, Body b2) {
 		Vector2D dist = b2.getPosition().minus(b1.getPosition());
 		double force = _g*((b1.getMass()*b2.getMass())/(dist.magnitude()*dist.magnitude()));
 		return dist.direction().scale(force);

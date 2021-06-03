@@ -1,12 +1,14 @@
 package simulator.view;
 
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 
 import org.json.JSONObject;
 
@@ -29,7 +32,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 	public LawsDialog(Controller ctrl) {
 		super();
 		_ctrl = ctrl;
-		setTitle(title);
+		setTitle(title);	
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
 		this.setPreferredSize(new Dimension (200,150));
@@ -37,8 +40,19 @@ public class LawsDialog extends JDialog implements ActionListener {
 		this.initGUI();
 	}
 
+	private void setDescription(JPanel mainPanel, String string) {
+		JTextArea textArea = new JTextArea(string);
+		JPanel panel = new JPanel(new BorderLayout());
+		textArea.setPreferredSize(new Dimension(200,50));
+		textArea.setEditable(false);
+		panel.add(textArea, BorderLayout.CENTER);
+		mainPanel.add(panel);
+		
+	}
+
 	protected void initGUI() {
 		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		JPanel buttons = new JPanel();
 		JComboBox selectForce;
 	    mainPanel.setLayout(new GridLayout(3,1));
@@ -68,11 +82,6 @@ public class LawsDialog extends JDialog implements ActionListener {
 			}
 		});
 	
-		/*
-		String response = (String) JOptionPane.showInputDialog(this, "Select gravity laws to be used.",
-				"Gravity Laws Selector", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), null);
-  
-  */
 
 		JButton cancel= new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
@@ -92,6 +101,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		} );
 		
 		JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		setDescription(mainPanel,"Select a force law and provide values for the parameters in the Value column (default values are used for parametes with no value).");
 		mainPanel.add(scrollPane);
 		buttons.add(cancel);
 		buttons.add(ok);
