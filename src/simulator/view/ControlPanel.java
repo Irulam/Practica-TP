@@ -150,7 +150,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		JLabel label = new JLabel(" Ticks: ");
 		JLabel label_delta = new JLabel(" Delta-Time: ");
 		_stepsField = new JSpinner(new SpinnerNumberModel(DEFAULT_STEPS, 1, null, 100));
-		_deltaField = new JTextField("25");
+		_deltaField = new JTextField("2500.0");
 
 		changeFieldSize(_stepsField);
 		changeFieldSize(_deltaField);
@@ -228,6 +228,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 				throw new IllegalArgumentException("Steps and delay should be greater than 0");
 			enableToolBar(false);
 			_stopped = false;
+			_ctrl.setDeltaTime(Double.parseDouble(_deltaField.getText()));
 			run_sim(steps);
 		} catch (NumberFormatException ex) {
 			JOptionPane.showMessageDialog(this, "Couldn't start simulation", "Simulation Error",
@@ -251,7 +252,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private void run_sim(int n) {
 		if (n > 0 && !_stopped) {
 			try {
-				_ctrl.run(Integer.parseInt(_deltaField.getText()));//1
+				_ctrl.run(1);
 			} catch (Exception e) {
 				_stopped = true;
 				return;

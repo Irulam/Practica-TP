@@ -99,6 +99,7 @@ public class Controller {
 		_simulator.addObserver(o);
 	}
 	
+	//TODO:No estoy usando lo del número de pasos ¿Puede que este mal run sim del control panel?
 	// Avanza cierto numero de pasos
 	public void run(int n) {
 		for (int i = 0; i <= n; ++i)
