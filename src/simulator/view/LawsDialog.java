@@ -2,6 +2,7 @@ package simulator.view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -39,13 +40,15 @@ public class LawsDialog extends JDialog implements ActionListener {
 		this.initGUI();
 	}
 
-	private void setDescription(JPanel mainPanel, String string) {
+	private Component setDescription(String string) {
 		JTextArea textArea = new JTextArea(string);
 		JPanel panel = new JPanel(new BorderLayout());
 		textArea.setPreferredSize(new Dimension(500,50));
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		panel.add(textArea, BorderLayout.CENTER);
-		mainPanel.add(panel);
+		return panel;
 		
 	}
 
@@ -99,7 +102,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		} );
 		
 		JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		setDescription(mainPanel,"Select a force law and provide values for the parameters in the Value column (default values are used for parametes with no value).");
+		mainPanel.add(setDescription("Select a force law and provide values for the parameters in the Value column (default values are used for parametes with no value)."));
 		mainPanel.add(scrollPane);
 		buttons.add(cancel);
 		buttons.add(ok);

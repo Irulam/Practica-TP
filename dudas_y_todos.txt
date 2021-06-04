@@ -1,4 +1,3 @@
-Hacer que en la tabla salgan valores por defecto
 Pintar c en el mapa
 Arreglar distribución del diálogo
 Que se pueda cambiar la masa de la tabla principal
