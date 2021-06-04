@@ -12,7 +12,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -75,7 +74,6 @@ public class LawsDialog extends JDialog implements ActionListener {
 				
 				for (JSONObject jo: _ctrl.getForceLawsInfo()) {
 					if (jo.getString("desc").equals(selection)) {
-						_ctrl.setForceLaws(jo);
 						_tableModel.setInfo(jo);
 					}
 				}
