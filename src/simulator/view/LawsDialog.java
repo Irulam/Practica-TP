@@ -34,7 +34,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 		setTitle(title);	
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setLocation(300, 200);
-		this.setPreferredSize(new Dimension (200,150));
+		this.setPreferredSize(new Dimension (500,250));
 		this.setMinimumSize(this.getPreferredSize());
 		this.initGUI();
 	}
@@ -42,7 +42,7 @@ public class LawsDialog extends JDialog implements ActionListener {
 	private void setDescription(JPanel mainPanel, String string) {
 		JTextArea textArea = new JTextArea(string);
 		JPanel panel = new JPanel(new BorderLayout());
-		textArea.setPreferredSize(new Dimension(200,50));
+		textArea.setPreferredSize(new Dimension(500,50));
 		textArea.setEditable(false);
 		panel.add(textArea, BorderLayout.CENTER);
 		mainPanel.add(panel);

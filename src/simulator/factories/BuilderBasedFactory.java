@@ -31,8 +31,6 @@ public class BuilderBasedFactory<T> implements Factory<T> {
 		return instance;
 	}
 
-	/*TODO: No entiendo esta función, a la hora de implementarla he puesto los valores por defecto tal y como pone
-	/* en la página 8*/
 	@Override
 	public List<JSONObject> getInfo() {
 		return new ArrayList<>(_objetos);

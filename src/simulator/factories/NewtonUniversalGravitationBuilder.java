@@ -25,9 +25,6 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
 		double g = jo.optDouble("G", 6.67e-11);
-		if(g == 6.67e-11) {
-			throw new IllegalArgumentException();
-		}
 		return new NewtonUniversalGravitation(g);
 	}
 

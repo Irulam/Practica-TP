@@ -1,9 +1,5 @@
 Hacer que en la tabla salgan valores por defecto
 Pintar c en el mapa
-Poner descripción del diálogo de las leyes
-En las descripción de la tabla poner los tipos y cómo tiene que ser la entrada
-Lanzar error que indique que en el json hay una string cuando el tipo no se corresponda, ahora mismo no funciona si no se corresponde en vez de lanzar un error
-Arreglar lo del delta time
-Ajustar tamaño del diálogo cuando salga
+Arreglar distribución del diálogo
 Que se pueda cambiar la masa de la tabla principal
 	//TODO:No estoy usando run(n) del controlador con lo del número de pasos ¿Puede que este mal run sim del control panel?
