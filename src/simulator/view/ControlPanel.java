@@ -42,6 +42,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private JButton _runButton;
 	private JButton _stopButton;
 	private JButton _changeLawsButton;
+	private JButton _bodiesButton;
 	private JSpinner _stepsField;
 	private JTextField _deltaField;
 	private JFileChooser fileChooser;
@@ -76,6 +77,17 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changeLaws();
+
+			}
+		});
+		
+		add(createSeparator());
+
+		add(_bodiesButton = createButton("bodies.png", "Change bodies"));
+		_bodiesButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeBodies();
 
 			}
 		});
@@ -167,6 +179,10 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 
 	protected void changeLaws() {
 		LawsDialog ld = new LawsDialog(_ctrl);
+	}
+	
+	protected void changeBodies() {
+		BodiesDialog bd = new BodiesDialog(_ctrl);
 	}
 
 	// Crea un diálogo para abrir ficheros
