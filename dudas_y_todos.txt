@@ -1,4 +1,5 @@
 Pintar c en el mapa
-Arreglar distribución del diálogo
-Que se pueda cambiar la masa de la tabla principal
-	//TODO:No estoy usando run(n) del controlador con lo del número de pasos ¿Puede que este mal run sim del control panel?
+//TODO: activar todos los botones
+Diálogo para cambiar los tipos de cuerpos y su masa
+Tabla para que salga qué tipo de cuerpo es
+¿Sería posible cambiar masa de los cuerpos desde la tabla principal?

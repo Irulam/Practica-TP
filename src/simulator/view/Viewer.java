@@ -124,7 +124,6 @@ public class Viewer extends JComponent implements SimulatorObserver {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// use ’gr’ to draw not ’g’ --- it gives nicer results
 		Graphics2D gr = (Graphics2D) g;
 		gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -190,9 +189,7 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		_scale = max > size ? 4.0 * max / size : 1.0;
 	}
 	
-	// This method draws a line from (x1,y1) to (x2,y2) with an arrow.
-	// The arrow is of height h and width w.
-	// The last two arguments are the colors of the arrow and the line
+
 	private void drawLineWithArrow(Graphics g, int x1, int y1, int x2, int y2, int w, int h, Color lineColor, Color arrowColor) {
 		int dx = x2 - x1, dy = y2 - y1;
 		double D = Math.sqrt(dx * dx + dy * dy);

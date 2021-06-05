@@ -44,9 +44,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 	private JButton _changeLawsButton;
 	private JSpinner _stepsField;
 	private JTextField _deltaField;
-	private int _delta;
 	private JFileChooser fileChooser;
-	private String fLawsDesc;
 
 	public ControlPanel(Controller _ctrl) {
 		this._ctrl = _ctrl;
@@ -169,29 +167,6 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 
 	protected void changeLaws() {
 		LawsDialog ld = new LawsDialog(_ctrl);
-		// Este codigo no se ejecuta hasta que se cierra
-		// _ctrl.setForceLaws(ld.getSelected());
-		
-		/*
-		ArrayList<String> options = new ArrayList<>();
-		for (JSONObject jo : _ctrl.getForceLawsInfo()) {
-			options.add(jo.getString("desc"));
-		}
-		
-		String response = (String) JOptionPane.showInputDialog(this, "Select gravity laws to be used.",
-				"Gravity Laws Selector", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), null);
-
-		// Tres opciones para pasar como options al inputDialog:
-		// 1. Usar ForceLaws -> Tienes que crear un metodo setForceLaws(ForceLaws) en lugar de JSON
-		// 2. Usar JSONObject -> ??? -> Pasar JSONObject
-		// 3. Usar Strings? -> Hace falta convertir luego de String a JSONObject igualmente
-		
-		for (JSONObject jo: _ctrl.getForceLawsInfo()) {
-			if (jo.getString("desc").equals(response)) {
-				_ctrl.setForceLaws(jo);
-			}
-		}
-		*/
 	}
 
 	// Crea un diálogo para abrir ficheros
@@ -249,6 +224,8 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 			try {
 				_ctrl.run(1);
 			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, "Couldn't run simulation", "Simulation Error", JOptionPane.ERROR_MESSAGE);
+				//TODO: activar todos los botones
 				_stopped = true;
 				return;
 			}

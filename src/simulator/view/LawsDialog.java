@@ -57,7 +57,6 @@ public class LawsDialog extends JDialog implements ActionListener {
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		JPanel buttons = new JPanel();
 		JComboBox selectForce;
-	    mainPanel.setLayout(new GridLayout(3,1));
 	    
 	    //Lista de leyes de fuerza
 		ArrayList<String> options = new ArrayList<>();

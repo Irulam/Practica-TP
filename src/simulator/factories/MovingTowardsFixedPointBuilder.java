@@ -1,6 +1,9 @@
 package simulator.factories;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import simulator.model.ForceLaws;
@@ -38,13 +41,22 @@ public class MovingTowardsFixedPointBuilder extends Builder<ForceLaws>{
 	
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
-		double g = jo.optDouble("g", 9.81);
+		double g = 0;
 		JSONArray jc = jo.optJSONArray("c");
 		double[] c = new double[] {0.0};
-		if (jc != null) {
-			c = toDouble(jc);
+		try {
+			if (jc != null) {
+				c = toDouble(jc);
+			}
+			if (jo.isNull("g")) {
+				g = 9.81;
+			}else {
+				g = jo.getDouble("g");
+			}
+		}catch(JSONException ex) {
+			JOptionPane.showMessageDialog(null, "Something went wrong: " + ex.getMessage(), 
+					"ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-			
 		return new MovingTowardsFixedPoint(g, c);
 	}
 	

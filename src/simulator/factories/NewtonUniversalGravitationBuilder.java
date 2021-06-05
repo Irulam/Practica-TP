@@ -1,5 +1,8 @@
 package simulator.factories;
 
+import javax.swing.JOptionPane;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import simulator.model.ForceLaws;
@@ -24,8 +27,20 @@ public class NewtonUniversalGravitationBuilder extends Builder<ForceLaws>{
 
 	@Override
 	protected ForceLaws createTheInstance(JSONObject jo) {
-		double g = jo.optDouble("G", 6.67e-11);
+		double g = 0;
+		try {
+			if (jo.isNull("G")) {
+				g = 6.67e-11;
+			}else {
+				g = jo.getDouble("G");
+			}
+		}catch(JSONException ex) {
+			JOptionPane.showMessageDialog(null, "Something went wrong: " + ex.getMessage(), 
+					"ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		return new NewtonUniversalGravitation(g);
+		
 	}
 
 }
