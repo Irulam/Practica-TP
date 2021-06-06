@@ -118,7 +118,7 @@ public class Controller {
 	}
 
 	public void createsJSON(JSONObject json) throws FileNotFoundException {
-		FileOutputStream jsonFile = new FileOutputStream("fichero.json");
+		FileOutputStream jsonFile = new FileOutputStream("resources/examples/fichero.json");
 		PrintStream printStream = new PrintStream(jsonFile);
 		printStream.print(json);
 	}

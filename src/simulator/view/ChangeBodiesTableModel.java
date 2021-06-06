@@ -48,7 +48,7 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 			case 1: return _types.opt(rowIndex);
 			case 2: return _position.opt(rowIndex);
 			case 3: return _velocity.opt(rowIndex);
-			case 4: return _mass.opt(rowIndex);
+			case 4: return _mass.optDouble(rowIndex);
 			default: return null;
 		}
 	}
@@ -87,7 +87,7 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 			data.put("id", _bodies.get(i));
 			data.put("p", _position.get(i));
 			data.put("v", _velocity.get(i));
-			data.put("mass", _mass.get(i));
+			data.put("mass", _mass.getDouble(i));
 			body.put("data", data);
 			jsonBodies.put(body);
 		}
@@ -95,6 +95,15 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 		return info;
 		
 	}
+	
+	protected double [] toDouble(JSONArray jarray) {
+		double[] darray = new double[jarray.length()];
+		for (int i = 0; i < jarray.length(); ++i)
+			darray[i] = jarray.getDouble(i);
+		
+		return darray;
+	}
+	
 	@Override
 	public void fireTableDataChanged() {
 		SwingUtilities.invokeLater(new Runnable() {
