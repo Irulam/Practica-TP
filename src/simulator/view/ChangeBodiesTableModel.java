@@ -56,10 +56,10 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 	@Override
 	public void setValueAt(Object val, int rowIndex, int columnIndex) {
 		switch(columnIndex) {
-			case 1:  _types.put(rowIndex,val);
-			case 2: _position.put(rowIndex,val);
-			case 3: _velocity.put(rowIndex,val);
-			case 4: _mass.put(rowIndex, val);
+			case 1:  _types.put(rowIndex,val);break;
+			case 2: _position.put(rowIndex,val);break;
+			case 3: _velocity.put(rowIndex,val);break;
+			case 4: _mass.put(rowIndex, val);break;
 		}
 	}
 	
@@ -81,6 +81,15 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 		JSONObject info = new JSONObject();
 		JSONArray jsonBodies = new JSONArray();
 		for(int i=0;i<numberOfBodies;i++) {
+			JSONObject body = new JSONObject();
+			JSONObject data = new JSONObject();
+			body.put("type", _types.get(i));
+			data.put("id", _bodies.get(i));
+			data.put("p", _position.get(i));
+			data.put("v", _velocity.get(i));
+			data.put("mass", _mass.get(i));
+			body.put("data", data);
+			jsonBodies.put(body);
 		}
 		info.put("bodies", jsonBodies);
 		return info;

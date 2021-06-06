@@ -5,12 +5,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -73,7 +75,7 @@ public class BodiesDialog extends JDialog implements ActionListener{
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO:Se crean los cuerpos con la información de la tabla
+				cratesJSON(_tableModel.getJSON());
 				setVisible(false);
 			}
 		} );
@@ -88,6 +90,15 @@ public class BodiesDialog extends JDialog implements ActionListener{
 		this.add(mainPanel);
 		this.setVisible(true);
 		
+		
+	}
+	protected void cratesJSON(JSONObject json) {
+		try {
+			_ctrl.createsJSON(json);
+		} catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Something went wrong: " + e.getMessage(), 
+					"ERROR", JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 	private Component setDescription(String string) {

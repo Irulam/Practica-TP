@@ -1,5 +1,8 @@
 package simulator.control;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -112,6 +115,12 @@ public class Controller {
 	
 	public void setForceLaws(JSONObject info) {
 		_simulator.setForceLawsLaws(_laws.createInstance(info));
+	}
+
+	public void createsJSON(JSONObject json) throws FileNotFoundException {
+		FileOutputStream jsonFile = new FileOutputStream("fichero.json");
+		PrintStream printStream = new PrintStream(jsonFile);
+		printStream.print(json);
 	}
 
 }
