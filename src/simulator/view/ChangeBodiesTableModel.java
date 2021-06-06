@@ -48,6 +48,7 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 			case 1: return _types.opt(rowIndex);
 			case 2: return _position.opt(rowIndex);
 			case 3: return _velocity.opt(rowIndex);
+			case 4: return _mass.opt(rowIndex);
 			default: return null;
 		}
 	}
@@ -58,12 +59,13 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 			case 1:  _types.put(rowIndex,val);
 			case 2: _position.put(rowIndex,val);
 			case 3: _velocity.put(rowIndex,val);
+			case 4: _mass.put(rowIndex, val);
 		}
 	}
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 1 || columnIndex == 2 || columnIndex == 3;
+		return columnIndex == 1 || columnIndex == 2 || columnIndex == 3 || columnIndex == 4;
 	}
 	
 	public void setRows(int selection) {
