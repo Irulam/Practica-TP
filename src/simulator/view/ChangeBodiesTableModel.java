@@ -55,10 +55,11 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 	
 	@Override
 	public void setValueAt(Object val, int rowIndex, int columnIndex) {
+		String vals = (String) val;
 		switch(columnIndex) {
 			case 1:  _types.put(rowIndex,val);break;
-			case 2: _position.put(rowIndex,val);break;
-			case 3: _velocity.put(rowIndex,val);break;
+			case 2: _position.put(rowIndex,new JSONArray(vals));break;
+			case 3: _velocity.put(rowIndex,new JSONArray(vals));break;
 			case 4: _mass.put(rowIndex, val);break;
 		}
 	}
@@ -87,7 +88,7 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 			data.put("id", _bodies.get(i));
 			data.put("p", _position.get(i));
 			data.put("v", _velocity.get(i));
-			data.put("mass", _mass.getDouble(i));
+			data.put("m", _mass.getDouble(i));
 			body.put("data", data);
 			jsonBodies.put(body);
 		}
@@ -96,13 +97,6 @@ public class ChangeBodiesTableModel extends AbstractTableModel{
 		
 	}
 	
-	protected double [] toDouble(JSONArray jarray) {
-		double[] darray = new double[jarray.length()];
-		for (int i = 0; i < jarray.length(); ++i)
-			darray[i] = jarray.getDouble(i);
-		
-		return darray;
-	}
 	
 	@Override
 	public void fireTableDataChanged() {

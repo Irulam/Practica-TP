@@ -93,5 +93,11 @@ public class Body {
 		velocity = new Vector2D();
 		
 	}
+
+	public void setMass(double mass) {
+		this.mass = mass;		
+	}
+	
+	public void setVelocity()
 	
 }

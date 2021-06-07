@@ -3,8 +3,11 @@ package simulator.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+
+import org.json.JSONArray;
 
 import simulator.control.Controller;
 import simulator.model.Body;
@@ -45,6 +48,30 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 		}
 
 	}
+	@Override
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
+		double valueDouble = _bodies.get(rowIndex).getMass();
+
+		try {
+			String vals = (String) value;
+			valueDouble = Double.parseDouble(vals); 
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Something went wrong: " + e.getMessage(), 
+					"BODIES TABLE ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		switch(columnIndex) {
+			case 1: _bodies.get(rowIndex).setMass(valueDouble);break;
+			case 2: _bodies.get(rowIndex).setVelocity(toDouble(new JSONArray(vals)));
+		}
+	}
+	
+	protected double [] toDouble(JSONArray jarray) {
+		double[] darray = new double[jarray.length()];
+		for (int i = 0; i < jarray.length(); ++i)
+			darray[i] = jarray.getDouble(i);
+		
+		return darray;
+	}
 	
 	@Override
 	public void fireTableDataChanged() {
@@ -54,7 +81,11 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 			}
 		});
 	}
-
+	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return columnIndex == 1;
+	}
 
 	@Override
 	public void onRegister(List<Body> bodies, double time, double tReal, String fLawsDesc) {

@@ -1,1 +1,1 @@
-{"bodies":[{"data":{"p":"dfgds","v":"fdgsdsg","mass":2,"id":"b1"},"type":"dfgdsf"}]}
+{"bodies":[{"data":{"p":[0,10],"v":[43545,50000,0],"id":"b1","m":5.0E20},"type":"basic"},{"data":{"p":[3,2],"v":[30000,3235],"id":"b2","m":2.0E30},"type":"basic"}]}

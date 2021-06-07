@@ -113,6 +113,10 @@ public class PhysicsSimulator{
 		}
 	}
 	
+	public void setBodyInfo(int num, double mass) {
+		bodies.get(num).setMass(mass);
+	}
+	
 	/*TODO: al ser de una interfaz es posible que tenga un booleano
 	para saber que está en la lista*/
 	public void addObserver(SimulatorObserver o) {
