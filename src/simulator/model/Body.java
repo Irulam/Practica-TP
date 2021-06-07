@@ -98,6 +98,13 @@ public class Body {
 		this.mass = mass;		
 	}
 	
-	public void setVelocity()
+	public void setVelocity(double arrayDouble1, double arrayDouble2) {
+		velocity = new Vector2D(arrayDouble1,arrayDouble2);
+	}
+
+	public void setPosition(double arrayDouble1, double arrayDouble2) {
+		position = new Vector2D(arrayDouble1,arrayDouble2);
+		
+	}
 	
 }

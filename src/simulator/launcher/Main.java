@@ -29,6 +29,7 @@ import simulator.factories.EpsilonEqualStatesBuilder;
 import simulator.factories.Factory;
 import simulator.factories.MassEqualStateBuilder;
 import simulator.factories.MassLossingBodyBuilder;
+import simulator.factories.MassOscilatingBodyBuilder;
 import simulator.factories.MovingTowardsFixedPointBuilder;
 import simulator.factories.NewthousandtonUniversalGravitationBuilder;
 import simulator.factories.NewtonUniversalGravitationBuilder;
@@ -72,6 +73,7 @@ public class Main {
 		ArrayList<Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
 		bodyBuilders.add(new MassLossingBodyBuilder());	
+		bodyBuilders.add(new MassOscilatingBodyBuilder());
 		_bodyFactory = new BuilderBasedFactory<>(bodyBuilders);
 
 		ArrayList<Builder<ForceLaws>> gravityLawsBuilders = new ArrayList<>();

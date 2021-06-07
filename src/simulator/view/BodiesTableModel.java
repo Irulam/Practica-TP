@@ -51,17 +51,25 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	@Override
 	public void setValueAt(Object value, int rowIndex, int columnIndex) {
 		double valueDouble = _bodies.get(rowIndex).getMass();
+		double [] arrayDouble = null;
 
 		try {
 			String vals = (String) value;
-			valueDouble = Double.parseDouble(vals); 
+			if(columnIndex == 1) {
+				valueDouble = Double.parseDouble(vals); 
+				_bodies.get(rowIndex).setMass(valueDouble);
+			}
+			if(columnIndex == 2) {
+				arrayDouble = toDouble(new JSONArray(vals));
+				_bodies.get(rowIndex).setPosition(arrayDouble[0],arrayDouble[1]);
+			}
+			if(columnIndex == 3) {
+				arrayDouble = toDouble(new JSONArray(vals));
+				_bodies.get(rowIndex).setVelocity(arrayDouble[0],arrayDouble[1]);
+			}
 		}catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Something went wrong: " + e.getMessage(), 
 					"BODIES TABLE ERROR", JOptionPane.ERROR_MESSAGE);
-		}
-		switch(columnIndex) {
-			case 1: _bodies.get(rowIndex).setMass(valueDouble);break;
-			case 2: _bodies.get(rowIndex).setVelocity(toDouble(new JSONArray(vals)));
 		}
 	}
 	
@@ -84,7 +92,7 @@ public class BodiesTableModel extends AbstractTableModel implements SimulatorObs
 	
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 1;
+		return columnIndex == 1 || columnIndex == 2 || columnIndex == 3;
 	}
 
 	@Override
