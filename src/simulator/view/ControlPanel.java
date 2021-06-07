@@ -82,7 +82,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 		});
 		
 		add(createSeparator());
-
+/*
 		add(_bodiesButton = createButton("bodies.png", "Change bodies"));
 		_bodiesButton.addActionListener(new ActionListener() {
 			@Override
@@ -91,7 +91,7 @@ public class ControlPanel extends JPanel implements SimulatorObserver {
 
 			}
 		});
-
+*/
 		add(createSeparator());
 
 		add(_runButton = createButton("run.png", "Run simulation"));

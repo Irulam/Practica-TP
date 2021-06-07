@@ -48,7 +48,7 @@ public class Viewer extends JComponent implements SimulatorObserver {
 		_showVectors = true;
 		setBorder(BorderFactory.createTitledBorder("Viewer"));
 		addKeyListener(new KeyListener() {
-			//...
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyChar()) {

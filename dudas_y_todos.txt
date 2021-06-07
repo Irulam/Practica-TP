@@ -1,5 +1,1 @@
 Pintar c en el mapa
-//TODO: activar todos los botones
-Diálogo para cambiar los tipos de cuerpos y su masa
-Tabla para que salga qué tipo de cuerpo es
-¿Sería posible cambiar masa de los cuerpos desde la tabla principal?

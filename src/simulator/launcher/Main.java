@@ -73,14 +73,14 @@ public class Main {
 		ArrayList<Builder<Body>> bodyBuilders = new ArrayList<>();
 		bodyBuilders.add(new BasicBodyBuilder());
 		bodyBuilders.add(new MassLossingBodyBuilder());	
-		bodyBuilders.add(new MassOscilatingBodyBuilder());
+		//bodyBuilders.add(new MassOscilatingBodyBuilder());
 		_bodyFactory = new BuilderBasedFactory<>(bodyBuilders);
 
 		ArrayList<Builder<ForceLaws>> gravityLawsBuilders = new ArrayList<>();
 		gravityLawsBuilders.add(new NoForceBuilder());
 		gravityLawsBuilders.add(new MovingTowardsFixedPointBuilder());
 		gravityLawsBuilders.add(new NewtonUniversalGravitationBuilder());
-		gravityLawsBuilders.add(new NewthousandtonUniversalGravitationBuilder());
+		//gravityLawsBuilders.add(new NewthousandtonUniversalGravitationBuilder());
 		_forceLawsFactory = new BuilderBasedFactory<>(gravityLawsBuilders);
 
 		ArrayList<Builder<StateComparator>> stateComparatorBuilders = new ArrayList<>();
